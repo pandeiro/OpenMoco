@@ -1,7 +1,7 @@
 FROM node:alpine
 
 # Install git and ssh
-RUN apk add --no-cache git openssh-client bash
+RUN apk add --no-cache git openssh-client bash jq
 
 # Install OpenCode globally
 RUN npm i -g opencode-ai@latest

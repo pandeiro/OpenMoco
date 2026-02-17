@@ -26,7 +26,10 @@ services:
       
       # OpenCode password (REQUIRED)
       - OPENCODE_SERVER_PASSWORD=${OPENCODE_SERVER_PASSWORD}
-      
+
+      # Ollama API key (optional)
+      - OLLAMA_API_KEY=${OLLAMA_API_KEY:-}
+
       # OpenCode configuration (adjust as needed)
       - NODE_ENV=production
     

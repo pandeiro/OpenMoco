@@ -17,6 +17,72 @@ if [ -n "$GIT_USER_EMAIL" ]; then
     git config --global user.email "$GIT_USER_EMAIL"
 fi
 
+# Configure Ollama provider if API key is present
+if [ -n "$OLLAMA_API_KEY" ]; then
+    echo "Ollama API key detected, configuring OpenCode provider..."
+    
+    CONFIG_DIR="$HOME/.config/opencode"
+    CONFIG_FILE="$CONFIG_DIR/opencode.json"
+    
+    # Create config directory if it doesn't exist
+    mkdir -p "$CONFIG_DIR"
+    
+    # Check if config file exists
+    if [ -f "$CONFIG_FILE" ]; then
+        # Config exists, check if ollama provider already configured
+        if grep -q '"ollama"' "$CONFIG_FILE"; then
+            echo "Ollama provider already configured in opencode.json"
+        else
+            # Add ollama provider to existing config
+            echo "Adding Ollama provider to existing config..."
+            # Use jq to merge the ollama provider
+            TEMP_FILE=$(mktemp)
+            jq '.provider.ollama = {
+              "npm": "@ai-sdk/openai-compatible",
+              "name": "Ollama Cloud",
+              "options": {
+                "baseURL": "https://ollama.com/v1"
+              },
+              "models": {
+                "glm-5:cloud": {
+                  "_launch": true,
+                  "name": "glm-5:cloud"
+                },
+                "qwen3-coder:480b-cloud": {
+                  "name": "qwen3-coder:480b-cloud"
+                }
+              }
+            }' "$CONFIG_FILE" > "$TEMP_FILE" && mv "$TEMP_FILE" "$CONFIG_FILE"
+        fi
+    else
+        # Config doesn't exist, create it with ollama provider
+        echo "Creating opencode.json with Ollama provider..."
+        cat > "$CONFIG_FILE" <<'EOF'
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Ollama Cloud",
+      "options": {
+        "baseURL": "https://ollama.com/v1"
+      },
+      "models": {
+        "glm-5:cloud": {
+          "_launch": true,
+          "name": "glm-5:cloud"
+        },
+        "qwen3-coder:480b-cloud": {
+          "name": "qwen3-coder:480b-cloud"
+        }
+      }
+    }
+  }
+}
+EOF
+    fi
+fi
+
 # Set up SSH for git (if SSH keys are mounted)
 if [ -d "/root/.ssh" ]; then
     chmod 700 /root/.ssh
