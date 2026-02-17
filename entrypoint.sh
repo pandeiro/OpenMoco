@@ -147,5 +147,9 @@ else
 fi
 
 # Launch OpenCode
-echo "Starting OpenCode..."
-exec opencode web --port 8080
+echo "Starting OpenCode web server..."
+echo "  Port: 8080"
+echo "  Hostname: 0.0.0.0 (accessible from outside container)"
+echo "  Password auth: ${OPENCODE_SERVER_PASSWORD:+enabled}${OPENCODE_SERVER_PASSWORD:-disabled}"
+echo ""
+exec opencode web --port 8080 --hostname 0.0.0.0
