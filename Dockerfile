@@ -1,7 +1,7 @@
-FROM node:alpine
+FROM node:bookworm-slim
 
 # Install git and ssh
-RUN apk add --no-cache git openssh-client bash jq
+RUN apt-get update && apt-get install -y --no-install-recommends git openssh-client bash jq && rm -rf /var/lib/apt/lists/*
 
 # Install OpenCode globally
 RUN npm i -g opencode-ai@latest
