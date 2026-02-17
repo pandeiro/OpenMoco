@@ -85,17 +85,36 @@ fi
 
 # Set up SSH for git (if SSH keys are mounted)
 if [ -d "/root/.ssh" ]; then
-    chmod 700 /root/.ssh
+    # Directory is mounted read-only, so we can't chmod it
+    # But we can check file permissions
     if [ -f "/root/.ssh/id_rsa" ]; then
-        chmod 600 /root/.ssh/id_rsa
+        # Check if permissions are correct (should be 600)
+        PERMS=$(stat -c %a "/root/.ssh/id_rsa" 2>/dev/null || stat -f %OLp "/root/.ssh/id_rsa" 2>/dev/null)
+        if [ "$PERMS" != "600" ]; then
+            echo "Warning: /root/.ssh/id_rsa has permissions $PERMS (should be 600)"
+            echo "Please fix on host: chmod 600 ./ssh/id_rsa"
+        fi
     fi
     if [ -f "/root/.ssh/id_ed25519" ]; then
-        chmod 600 /root/.ssh/id_ed25519
+        PERMS=$(stat -c %a "/root/.ssh/id_ed25519" 2>/dev/null || stat -f %OLp "/root/.ssh/id_ed25519" 2>/dev/null)
+        if [ "$PERMS" != "600" ]; then
+            echo "Warning: /root/.ssh/id_ed25519 has permissions $PERMS (should be 600)"
+            echo "Please fix on host: chmod 600 ./ssh/id_ed25519"
+        fi
     fi
     
     # Add GitHub to known_hosts to avoid prompt
-    ssh-keyscan github.com >> /root/.ssh/known_hosts 2>/dev/null
-    ssh-keyscan gitlab.com >> /root/.ssh/known_hosts 2>/dev/null
+    mkdir -p /tmp/.ssh
+    ssh-keyscan github.com >> /tmp/.ssh/known_hosts 2>/dev/null
+    ssh-keyscan gitlab.com >> /tmp/.ssh/known_hosts 2>/dev/null
+    
+    # Merge with mounted known_hosts if it exists
+    if [ -f "/root/.ssh/known_hosts" ]; then
+        cat /root/.ssh/known_hosts >> /tmp/.ssh/known_hosts 2>/dev/null
+    fi
+    
+    # Point SSH to use our writable known_hosts
+    export GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/tmp/.ssh/known_hosts -o StrictHostKeyChecking=accept-new"
 fi
 
 # Clone repositories from repos.txt if it exists
