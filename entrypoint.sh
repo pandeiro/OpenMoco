@@ -83,6 +83,51 @@ EOF
     fi
 fi
 
+# Configure Google AI Studio provider if API key is present
+if [ -n "$GOOGLE_AI_STUDIO_API_KEY" ]; then
+    echo "Google AI Studio API key detected, configuring OpenCode provider..."
+    
+    CONFIG_DIR="$HOME/.config/opencode"
+    CONFIG_FILE="$CONFIG_DIR/opencode.json"
+    
+    # Create config directory if it doesn't exist
+    mkdir -p "$CONFIG_DIR"
+    
+    # Check if config file exists
+    if [ -f "$CONFIG_FILE" ]; then
+        # Config exists, check if google provider already configured
+        if grep -q '"google"' "$CONFIG_FILE"; then
+            echo "Google provider already configured in opencode.json"
+        else
+            # Add google provider to existing config
+            echo "Adding Google provider to existing config..."
+            TEMP_FILE=$(mktemp)
+            jq '.provider.google = {
+              "options": {
+                "apiKey": "'"$GOOGLE_AI_STUDIO_API_KEY"'",
+                "baseURL": "https://generativelanguage.googleapis.com/v1beta"
+              }
+            }' "$CONFIG_FILE" > "$TEMP_FILE" && mv "$TEMP_FILE" "$CONFIG_FILE"
+        fi
+    else
+        # Config doesn't exist, create it with google provider
+        echo "Creating opencode.json with Google provider..."
+        cat > "$CONFIG_FILE" <<EOF
+{
+  "\$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "google": {
+      "options": {
+        "apiKey": "${GOOGLE_AI_STUDIO_API_KEY}",
+        "baseURL": "https://generativelanguage.googleapis.com/v1beta"
+      }
+    }
+  }
+}
+EOF
+    fi
+fi
+
 # Set up SSH for git (if SSH keys are mounted)
 if [ -d "/root/.ssh" ]; then
     # Directory is mounted read-only, so we can't chmod it

@@ -122,9 +122,13 @@ Optional Variables
 | Variable | Description | Example |
 |----------|-------------|---------|
 | `OLLAMA_API_KEY` | Ollama Cloud API Key | xyz |
+| `GOOGLE_AI_STUDIO_API_KEY` | Google AI Studio API Key | xyz |
 
 If you supply `OLLAMA_API_KEY`, the setup script will include Ollama as a model
 provider for OpenCode.
+
+If you supply `GOOGLE_AI_STUDIO_API_KEY`, the setup script will include Google AI Studio
+as a model provider for OpenCode.
 
 ### Repository List (config/repos.txt)
 
