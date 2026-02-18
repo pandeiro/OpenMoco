@@ -146,6 +146,42 @@ else
     echo "No repos.txt found at $REPOS_FILE, skipping auto-clone."
 fi
 
+# Set up custom PS1 with git status, time, etc
+cat > /root/.bashrc <<'EOF'
+# Custom MoCo PS1
+parse_git_status() {
+    if ! git rev-parse --git-dir > /dev/null 2>&1; then
+        return
+    fi
+    
+    local branch=$(git symbolic-ref --short HEAD 2>/dev/null || git describe --tags --always 2>/dev/null)
+    local status=$(git status --porcelain 2>/dev/null)
+    local output=""
+    
+    # Check for staged changes
+    if echo "$status" | grep -q "^M"; then
+        output+="*"
+    fi
+    if echo "$status" | grep -q "^A"; then
+        output+="+"
+    fi
+    # Check for unstaged changes
+    if echo "$status" | grep -q "^.M"; then
+        output+="~"
+    fi
+    # Check for untracked files
+    if echo "$status" | grep -q "^??"; then
+        output+="?"
+    fi
+    
+    if [ -n "$branch" ]; then
+        echo " ($branch${output})"
+    fi
+}
+
+PS1='\[\033[01;32m\]\t\[\033[00m\] \[\033[01;34m\]\w\[\033[00m\]\[\033[01;33m\]$(parse_git_status)\[\033[00m\]\n\$ '
+EOF
+
 # Launch OpenCode
 echo "Starting OpenCode web server..."
 echo "  Port: 8080"
