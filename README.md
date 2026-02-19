@@ -100,28 +100,26 @@ The environment is configured to automatically activate these tools in your shel
 
 ## Managing Projects
 
-OpenMoco provides built-in support for **GitHub CLI (`gh`)** and **GitLab CLI (`glab`)** directly in the OpenCode terminal. This makes it easy to clone, manage, and remove projects dynamically.
+Projects are cloned into the `/workspace` directory. You can add repos in two ways:
 
-### Adding Projects (Clone)
-Login once to persist your credentials:
-```bash
-gh auth login
-glab auth login
+### Pre-configured Repos
+Add repo URLs to `config/repos.txt` (one per line):
 ```
+git@github.com:user/repo.git
+https://github.com/user/repo.git
+```
+They'll be cloned automatically on container start.
 
-List and clone repositories directly into the workspace:
+### Manual Cloning
+Shell into the container and use git directly:
 ```bash
-# GitHub
-gh repo list
-gh repo clone user/repo
-
-# GitLab
-glab repo list
-glab repo clone user/repo
+docker compose exec opencode bash
+cd /workspace
+git clone https://x-access-token:YOUR_TOKEN@github.com/user/repo.git
 ```
 
 ### Creating New Projects
-You can scaffold new projects from scratch using `mise` and standard build tools:
+Scaffold new projects from scratch using `mise` and standard build tools:
 ```bash
 mkdir /workspace/my-new-app
 cd /workspace/my-new-app && git init
@@ -129,7 +127,7 @@ mise use node@latest
 ```
 
 ### Removing Projects
-To save disk space, simply remove the directory from the workspace. Since configurations for `gh` and `glab` are persisted in Docker volumes, you won't need to re-authenticate when you come back.
+To save disk space, simply remove the directory from the workspace.
 
 ## Daily Use
 
