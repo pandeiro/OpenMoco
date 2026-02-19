@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Install mise (replaces asdf) for language and tool version management
 RUN curl https://mise.run | sh
-ENV PATH="/root/.local/share/mise/bin:/root/.local/share/mise/shims:$PATH"
+ENV PATH="/root/.local/bin:/root/.local/share/mise/bin:/root/.local/share/mise/shims:$PATH"
 
 # Install OpenCode globally
 RUN npm i -g opencode-ai@latest
