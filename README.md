@@ -38,7 +38,7 @@ cp config/repos.txt.example config/repos.txt
 nano .env  # Set GIT_USER_NAME and GIT_USER_EMAIL
 nano config/repos.txt  # Add your repos
 
-# 2. Add SSH keys
+# 2. Add SSH keys (optional - for SSH-based git URLs)
 cp ~/.ssh/id_rsa ./ssh/ && chmod 600 ./ssh/id_rsa
 
 # 3. Run
@@ -115,7 +115,10 @@ Shell into the container and use git directly:
 ```bash
 docker compose exec opencode bash
 cd /workspace
+# HTTPS with token
 git clone https://x-access-token:YOUR_TOKEN@github.com/user/repo.git
+# Or SSH (if you've added your SSH key)
+git clone git@github.com:user/repo.git
 ```
 
 ### Creating New Projects
