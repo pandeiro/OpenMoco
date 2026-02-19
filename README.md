@@ -59,48 +59,48 @@ OpenMoco uses **Mise** (a modern `asdf` replacement) for multi-stack toolchain m
 - **Base Layer**: Common build dependencies (`build-essential`, `libssl-dev`) are pre-installed in the image to support compiling tools if needed.
 
 ### Usage
-To install or use a specific version of a language:
+To install or use a specific version of a language (run these in the OpenCode terminal):
 ```bash
-docker compose exec opencode mise use python@3.12
-docker compose exec opencode mise use go@latest
-docker compose exec opencode mise use node@22
+mise use python@3.12
+mise use go@latest
+mise use node@22
 ```
 
 To see what's available:
 ```bash
-docker compose exec opencode mise ls-remote
+mise ls-remote
 ```
 
 The environment is configured to automatically activate these tools in your shell sessions.
 
 ## Managing Projects
 
-OpenMoco provides built-in support for **GitHub CLI (`gh`)** and **GitLab CLI (`glab`)** to make it easy to clone, manage, and remove projects dynamically.
+OpenMoco provides built-in support for **GitHub CLI (`gh`)** and **GitLab CLI (`glab`)** directly in the OpenCode terminal. This makes it easy to clone, manage, and remove projects dynamically.
 
 ### Adding Projects (Clone)
 Login once to persist your credentials:
 ```bash
-docker compose exec opencode gh auth login
-docker compose exec opencode glab auth login
+gh auth login
+glab auth login
 ```
 
 List and clone repositories directly into the workspace:
 ```bash
 # GitHub
-docker compose exec opencode gh repo list
-docker compose exec opencode gh repo clone user/repo
+gh repo list
+gh repo clone user/repo
 
 # GitLab
-docker compose exec opencode glab repo list
-docker compose exec opencode glab repo clone user/repo
+glab repo list
+glab repo clone user/repo
 ```
 
 ### Creating New Projects
 You can scaffold new projects from scratch using `mise` and standard build tools:
 ```bash
-docker compose exec opencode mkdir /workspace/my-new-app
-docker compose exec opencode cd /workspace/my-new-app && git init
-docker compose exec opencode mise use node@latest
+mkdir /workspace/my-new-app
+cd /workspace/my-new-app && git init
+mise use node@latest
 ```
 
 ### Removing Projects
