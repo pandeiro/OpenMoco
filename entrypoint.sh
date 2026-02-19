@@ -194,7 +194,7 @@ fi
 # Set up custom PS1 and mise initialization
 cat > /root/.bashrc <<'EOF'
 # MoCo shell initialization
-export PATH="/root/.local/share/mise/bin:/root/.local/share/mise/shims:$PATH"
+export PATH="/root/.local/bin:/root/.local/share/mise/bin:/root/.local/share/mise/shims:$PATH"
 eval "$(mise activate bash)"
 
 # Custom MoCo PS1
