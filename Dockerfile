@@ -12,8 +12,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     libssl-dev \
     pkg-config \
-    gnupg \
-    && rm -rf /var/lib/apt/lists/*
+    gnupg
+
+# Keep package list for now, easier to install needed packages
+#   gnupg \
+#   && rm -rf /var/lib/apt/lists/*
 
 # Install mise (replaces asdf) for language and tool version management
 RUN curl https://mise.run | sh
