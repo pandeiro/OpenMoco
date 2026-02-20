@@ -22,24 +22,43 @@ It bundles [OpenCode](https://opencode.ai/) with a custom multi-service architec
 
 ## Quick Setup
 
+### Prerequisites
+- **Docker** and **Docker Compose** installed on your VPS or local machine
+- **Git** configured with SSH keys for private repo access
+
+### Required Authentication
+| Credential | Purpose |
+|------------|---------|
+| `SSH Key` | Clone private repositories from GitHub |
+| `GITHUB_PAT` | List and search your GitHub repos in the UI |
+
+### Optional Authentication
+| Credential | Purpose |
+|------------|---------|
+| `GROQ_API_KEY` | Primary AI for voice prompt reformulation (fast, high-quality) |
+| `GEMINI_API_KEY` | Fallback AI for voice reformulation |
+| `WHISPER_API_KEY` | Improved voice-to-text accuracy (OpenAI) |
+| Web Push (VAPID) | CI/CD failure push notifications to your phone |
+
+### Deploy
+
 ```bash
 # 1. Clone and configure
 cp .env.example .env
-# Edit .env and follow the Configuration section below
-nano .env
+nano .env  # Set required: GITHUB_PAT, SSH key. Optional: AI keys, VAPID
 
-# 2. Add SSH keys (required for private repo cloning)
+# 2. Add SSH key (required for private repo cloning)
 cp ~/.ssh/id_rsa ./ssh/ && chmod 600 ./ssh/id_rsa
 
 # 3. Build and Run
 docker compose up --build -d
 
 # 4. Access
-# Open the Init PWA (recommended for mobile)
-open http://localhost:7777/init/
-# Or the full OpenCode editor
-open http://localhost:7777/
+# Mobile PWA (recommended): http://your-vps-ip:7777/init/
+# Full OpenCode editor: http://your-vps-ip:7777/
 ```
+
+> **Note:** For production VPS deployments with HTTPS and domain setup, see [Deployment](doc/deployment.md).
 
 ## Configuration
 
