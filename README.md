@@ -18,7 +18,7 @@ It bundles [OpenCode](https://opencode.ai/) with a custom multi-service architec
 - **`opencode`**: The core development environment.
 - **`openmoko-init`**: Static PWA frontend (Vite-based).
 - **`openmoko-events`**: Node.js backend for API, GitHub integration, and push notifications.
-- **`openmoko-nginx`**: Reverse proxy routing all traffic through port 7777.
+- **`openmoko-gateway`**: Reverse proxy routing all traffic through port 7777.
 
 ## Quick Setup
 

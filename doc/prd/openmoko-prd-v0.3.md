@@ -188,7 +188,7 @@ services:
   opencode:
     # unchanged from existing setup
 
-  openmoko-nginx:
+  openmoko-gateway:
     image: nginx:alpine
     ports:
       - "7777:80"

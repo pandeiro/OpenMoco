@@ -8,7 +8,7 @@ OpenMoko is a voice-first, progressive web app (PWA) wrapper around OpenCode. It
 ## Architecture & Services
 The project uses a 4-container Docker Compose setup routed through Nginx:
 1. **`opencode`**: The core AI agent environment (runs on `:8080` internally).
-2. **`openmoko-nginx`**: The ingress router (`:7777` mapped to `:80`). See `config/nginx.conf`.
+2. **`openmoko-gateway`**: The ingress router (`:7777` mapped to `:80`). See `config/nginx.conf`.
 3. **`openmoko-events`**: A Node.js backend (`:3001` internally). Handles GitHub API routing, Webhooks, Push Notifications, Audio Transcription (Whisper), and LLM Reformulation (Groq/Gemini).
 4. **`openmoko-init`**: The Vite-built frontend PWA running on `:3000` internally.
 

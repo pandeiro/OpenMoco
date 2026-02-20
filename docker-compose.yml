@@ -46,7 +46,7 @@ services:
 
     restart: unless-stopped
 
-  openmoko-nginx:
+  openmoko-gateway:
     image: nginx:alpine
     ports:
       - "7777:80"
