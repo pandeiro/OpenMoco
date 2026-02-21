@@ -24,6 +24,7 @@ export async function render() {
     let activeSession = null;
     let currentTranscript = '';
     let reformulatedData = null;
+    let reformulationError = null; // New variable to store reformulation error
     let notificationsEnabled = true;
 
     const speech = new SpeechManager(
@@ -86,6 +87,7 @@ export async function render() {
             }
         } else if (state === 'REFORMULATING') {
             renderProcessing('Reformulating...');
+            reformulationError = null; // Reset error before new attempt
             try {
                 const project = selectedRepo.isNew ? { name: "New Project", isNew: true } : {
                     name: selectedRepo.name,
@@ -97,6 +99,7 @@ export async function render() {
                 speech.setState('REVIEWING');
             } catch (err) {
                 console.error('Reformulation failed:', err);
+                reformulationError = 'Failed to reformulate prompt. Using raw transcript.';
                 reformulatedData = { prompt: currentTranscript, slug: null };
                 speech.setState('REVIEWING');
             }
@@ -216,6 +219,7 @@ export async function render() {
         reviewContainer.innerHTML = `
       <div class="card" style="margin-bottom: 1.5rem;">
         <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem; color: var(--fg-dim);">AGENT PROMPT</label>
+        ${reformulationError ? `<p style="color: var(--error); font-size: 0.85rem; margin-top: -0.5rem; margin-bottom: 1rem;">${reformulationError}</p>` : ''}
         <textarea id="prompt-edit" class="card" style="width: 100%; min-height: 150px; padding: 1rem; border: none; font-family: inherit; font-size: 1rem; background: transparent;">${reformulatedData.prompt}</textarea>
         ${reformulatedData.slug ? `<div style="margin-top: 1rem; font-size: 0.8rem; color: var(--accent);">Branch: ${reformulatedData.slug}</div>` : ''}
       </div>
@@ -257,6 +261,7 @@ export async function render() {
         reviewContainer.querySelector('#reset-btn').onclick = () => {
             currentTranscript = '';
             reformulatedData = null;
+            reformulationError = null; // Clear error on reset
             speech.setState('IDLE');
         };
 

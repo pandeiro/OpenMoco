@@ -36,8 +36,8 @@ It bundles [OpenCode](https://opencode.ai/) with a custom multi-service architec
 ### Optional Authentication
 | Credential | Purpose |
 |------------|---------|
-| `GROQ_API_KEY` | Primary AI for voice prompt reformulation (fast, high-quality) |
-| `GEMINI_API_KEY` | Fallback AI for voice reformulation |
+| `GEMINI_API_KEY` | Primary AI for voice reformulation (Gemini 3 Flash Thinking) |
+| `OLLAMA_API_KEY` | Fallback AI for voice prompt reformulation (Ollama Cloud) |
 | `WHISPER_API_KEY` | Improved voice-to-text accuracy (OpenAI) |
 | Web Push (VAPID) | CI/CD failure push notifications to your phone |
 
@@ -73,8 +73,8 @@ Detailed in `.env.example`. Key groups:
   - `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_CONTACT`
 - **AI Inference**:
   - `WHISPER_API_KEY` (OpenAI - optional for improved voice)
-  - `GROQ_API_KEY` (Llama 3.3 70B - primary reformulation)
-  - `GEMINI_API_KEY` (Gemini Flash - fallback reformulation)
+  - `GEMINI_API_KEY` (Gemini 3 Flash - primary reformulation)
+  - `OLLAMA_API_KEY` (Ollama Cloud - fallback reformulation)
 
 ### GitHub Webhook Setup
 

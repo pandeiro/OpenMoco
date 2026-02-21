@@ -1,9 +1,9 @@
 /**
- * Reformulation — Groq (default) or Gemini Flash.
+ * Reformulation — Gemini 3 Flash (default) or Ollama Cloud.
  * Single LLM call: raw transcript + project context → clean agent prompt + optional branch slug.
  */
 
-import Groq from 'groq-sdk';
+import { GoogleGenAI } from '@google/genai';
 
 /**
  * Build the system prompt for reformulation.
@@ -32,7 +32,7 @@ If it sounds like the developer might be talking about a different project than 
 
 /**
  * Reformulate a transcript into a clean agent prompt.
- * Uses Groq (Llama 3.3 70B) by default, falls back to Gemini Flash.
+ * Uses Gemini 3 Flash (Thinking: Medium) by default, falls back to Ollama Cloud.
  *
  * @param {string} transcript - Raw voice transcript
  * @param {object} project - Active project metadata { name, description, defaultBranch, lastPushed }
@@ -43,71 +43,85 @@ export async function reformulate(transcript, project, enabledRepos = []) {
     const systemPrompt = buildSystemPrompt(project, enabledRepos);
     const userMessage = `RAW TRANSCRIPT:\n${transcript}`;
 
-    // Try Groq first
-    if (process.env.GROQ_API_KEY) {
-        return reformulateWithGroq(systemPrompt, userMessage);
-    }
-
-    // Fall back to Gemini
+    // 1. Try Gemini 3 Flash First (Generous free tier, high quality)
     if (process.env.GEMINI_API_KEY) {
-        return reformulateWithGemini(systemPrompt, userMessage);
+        try {
+            return await reformulateWithGemini(systemPrompt, userMessage);
+        } catch (err) {
+            console.error('Gemini reformulation failed, falling back to Ollama Cloud:', err.message);
+        }
     }
 
-    // No inference provider configured — return raw transcript as-is
+    // 2. Fall back to Ollama Cloud Inference API
+    if (process.env.OLLAMA_API_KEY) {
+        try {
+            return await reformulateWithOllama(systemPrompt, userMessage);
+        } catch (err) {
+            console.error('Ollama Cloud reformulation failed:', err.message);
+        }
+    }
+
+    // No inference provider configured or all failed — return raw transcript as-is
     return {
         prompt: transcript,
         slug: null,
     };
 }
 
-async function reformulateWithGroq(systemPrompt, userMessage) {
-    const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
-
-    const completion = await groq.chat.completions.create({
-        model: 'llama-3.3-70b-versatile',
-        messages: [
-            { role: 'system', content: systemPrompt },
-            { role: 'user', content: userMessage },
-        ],
-        temperature: 0.3,
-        max_tokens: 1024,
-        response_format: { type: 'json_object' },
+async function reformulateWithGemini(systemPrompt, userMessage) {
+    const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+    
+    const response = await ai.models.generateContent({
+        model: 'gemini-3-flash-preview',
+        contents: `${systemPrompt}\n\n${userMessage}`,
+        config: {
+            thinkingConfig: {
+                thinkingLevel: 'medium',
+            },
+            responseMimeType: 'application/json',
+            temperature: 0.3,
+            maxOutputTokens: 1024,
+        },
     });
 
-    const raw = completion.choices[0]?.message?.content || '';
+    const raw = response.text || '';
     return parseReformulationResponse(raw);
 }
 
-async function reformulateWithGemini(systemPrompt, userMessage) {
-    // Use Gemini REST API directly (Google AI Studio free tier)
-    const apiKey = process.env.GEMINI_API_KEY;
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+async function reformulateWithOllama(systemPrompt, userMessage) {
+    const ollamaApiKey = process.env.OLLAMA_API_KEY;
+    const model = 'gpt-oss:120b'; 
+    const url = 'https://ollama.com/api/chat'; 
 
     const res = await fetch(url, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${ollamaApiKey}`,
+        },
         body: JSON.stringify({
-            contents: [
-                {
-                    parts: [{ text: `${systemPrompt}\n\n${userMessage}` }],
-                },
+            model: model,
+            messages: [
+                { role: 'system', content: systemPrompt },
+                { role: 'user', content: userMessage },
             ],
-            generationConfig: {
+            stream: false,
+            format: 'json',
+            options: {
                 temperature: 0.3,
-                maxOutputTokens: 1024,
-                responseMimeType: 'application/json',
-            },
+                num_predict: 1024,
+            }
         }),
     });
 
     if (!res.ok) {
         const body = await res.text();
-        throw new Error(`Gemini API error ${res.status}: ${body}`);
+        throw new Error(`Ollama API error ${res.status}: ${body}`);
     }
 
     const data = await res.json();
-    const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
-    return parseReformulationResponse(text);
+    const raw = data.message?.content || '';
+    return parseReformulationResponse(raw);
 }
 
 function parseReformulationResponse(raw) {
