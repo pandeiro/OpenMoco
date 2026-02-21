@@ -68,7 +68,7 @@ export async function render() {
 
             try {
                 const res = await createSession({
-                    projectPath: `/workspace/${failure.repo}`,
+                    projectPath: `/code/${failure.repo}`,
                     prompt,
                     repo: failure.repo,
                     notificationsEnabled: true

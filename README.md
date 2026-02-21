@@ -99,7 +99,7 @@ Open the Init PWA and tap the gear icon ⚙️. Search for your GitHub repos and
 If a CI check fails, you'll receive an OS-level push notification. Tap it to see the failing logs and send a fix instruction back to the agent.
 
 ## Persistence
-- `/workspace`: Cloned projects.
+- `/code`: Cloned projects.
 - `events_data` (volume): Repo state, sessions, and failure records.
 - `mise_data` (volume): Persisted language/toolchain installations across container restarts.
 

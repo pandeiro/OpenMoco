@@ -82,7 +82,7 @@ router.post('/:name/enable', async (req, res) => {
 
         // Clone (use SSH URL for private repos, HTTPS for public)
         const cloneUrl = repo.private ? repo.sshUrl : repo.cloneUrl;
-        const targetPath = `/workspace/${name}`;
+        const targetPath = `/code/${name}`;
 
         try {
             if (existsSync(targetPath)) {
@@ -124,7 +124,7 @@ router.post('/:name/disable', async (req, res) => {
         const repos = (await readJSON('repos.json')) || {};
 
         // Remove from filesystem
-        const targetPath = `/workspace/${name}`;
+        const targetPath = `/code/${name}`;
         try {
             execSync(`rm -rf ${targetPath}`, { stdio: 'pipe' });
         } catch (err) {

@@ -104,7 +104,7 @@ The mobile entry point for starting an agent task.
    - **`Start on main →`** — secondary, smaller. Requires deliberate tap.
 9. **Notification toggle** — below the buttons, "Notify me when CI completes" on/off, default on. If on and push permission not yet granted, tapping either Start button triggers the permission prompt before proceeding.
 10. On tap:
-    - Events service calls `client.session.create({ projectPath: '/workspace/[repo]' })`
+    - Events service calls `client.session.create({ directory: '/code/[repo]' })`
     - Calls `client.session.prompt(session.id, { text: formattedPrompt, mode: 'plan' })`
     - Prompt includes branch instruction if applicable: `git checkout -b [slug]` as first action
     - Stores session ID + repo + branch in `active_session.json`
@@ -128,7 +128,7 @@ See Appendix B for SDK spike checklist.
 
 If the developer selects "New project" (no GitHub repo, starting from scratch):
 - Init prompts for a project name
-- Events service creates `/workspace/[name]`, runs `git init`
+- Events service creates `/code/[name]`, runs `git init`
 - Session created against that path
 - No CI/CD webhook available until they add a remote — Init notes this inline
 
@@ -210,7 +210,7 @@ services:
     env_file: .env
     expose: ['3001']
     volumes:
-      - ./workspace:/workspace:rw    # rw needed for clone delegation
+      - ./code:/code:rw    # rw needed for clone delegation
       - ./ssh:/root/.ssh:ro          # git over SSH
       - events_data:/data
 
@@ -437,7 +437,7 @@ All state is stored as JSON files on the `events_data` Docker volume at `/data/`
 {
   "sessionId": "abc123",
   "repo": "my-api",
-  "projectPath": "/workspace/my-api",
+  "projectPath": "/code/my-api",
   "branch": "fix/admin-route-auth-bypass",
   "createdAt": "2026-02-19T21:00:00Z",
   "notificationsEnabled": true

@@ -273,7 +273,7 @@ export async function render() {
         renderProcessing('Creating session...');
 
         try {
-            const projectPath = selectedRepo.isNew ? `/workspace/${reformulatedData.slug || 'new-project'}` : `/workspace/${selectedRepo.name}`;
+            const projectPath = selectedRepo.isNew ? `/code/${reformulatedData.slug || 'new-project'}` : `/code/${selectedRepo.name}`;
 
             const res = await createSession({
                 projectPath,

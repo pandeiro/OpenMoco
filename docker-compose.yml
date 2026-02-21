@@ -7,7 +7,7 @@ services:
     expose:
       - "8080"
     volumes:
-      - ./workspace:/workspace:rw
+      - ./code:/code:rw
       - agent_data:/root/.local/share/opencode:rw
       - mise_data:/root/.local/share/mise:rw
       - agent_state:/root/.local/state/opencode:rw
@@ -51,7 +51,7 @@ services:
     expose:
       - "3001"
     volumes:
-      - ./workspace:/workspace:rw
+      - ./code:/code:rw
       - ./ssh:/root/.ssh:ro
       - events_data:/data
     depends_on:
