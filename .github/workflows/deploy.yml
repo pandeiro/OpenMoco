@@ -49,6 +49,7 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           script: |
+            echo "Start deploy..."
             cd ${{ secrets.DEPLOY_PATH }}
             
             # First deploy: create .env from secret if it doesn't exist
