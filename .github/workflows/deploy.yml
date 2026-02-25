@@ -59,11 +59,11 @@ jobs:
             if [ ! -f .env ]; then
               echo "${{ secrets.PROD_ENV }}" > .env
             fi
-            
+
             # First deploy: create SSH key from secret if it doesn't exist
             mkdir -p ssh
             if [ ! -f ssh/id_rsa ]; then
-              echo "${{ secrets.GITHUB_SSH_KEY }}" > ssh/id_rsa
+              echo "${{ secrets.GIT_SSH_KEY }}" > ssh/id_rsa
               chmod 600 ssh/id_rsa
             fi
             
