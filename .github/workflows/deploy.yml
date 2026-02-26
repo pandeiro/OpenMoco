@@ -51,19 +51,23 @@ jobs:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
+          env: |
+            PROD_ENV: ${{ secrets.PROD_ENV }}
+            DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+            GIT_SSH_KEY: ${{ secrets.GIT_SSH_KEY }}
           script: |
             echo "Start deploy..."
-            cd ${{ secrets.DEPLOY_PATH }}
+            cd $DEPLOY_PATH
             
             # First deploy: create .env from secret if it doesn't exist
             if [ ! -f .env ]; then
-              echo "${{ secrets.PROD_ENV }}" > .env
+              printf '%s\n' "$PROD_ENV" > .env
             fi
 
             # First deploy: create SSH key from secret if it doesn't exist
             mkdir -p ssh
             if [ ! -f ssh/id_rsa ]; then
-              echo "${{ secrets.GIT_SSH_KEY }}" > ssh/id_rsa
+              printf '%s\n' "$GIT_SSH_KEY" > ssh/id_rsa
               chmod 600 ssh/id_rsa
             fi
             
