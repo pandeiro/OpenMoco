@@ -45,6 +45,8 @@ services:
     env_file: .env
     expose:
       - "3001"
+    labels:
+      - "logging=enabled"
     volumes:
       - ./code:/code:rw
       - ./ssh:/root/.ssh:ro
