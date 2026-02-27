@@ -32,6 +32,12 @@ The init Vite dev server proxies `/api/*` to `localhost:3001`. Ensure you have A
 ## Single Source of Truth
 The Product Requirements Document (PRD) at `doc/prd/openmoko-prd-v0.4.md` is the absolute source of truth for architectural constraints and feature behavior. **Always consult the PRD before fundamentally altering how features operate.**
 
+## Runtime Secrets & Infra Repo
+Production secrets are stored in a separate private repository (`pandeiro/infra/OpenMoko/env.production`). The deploy workflow (`.github/workflows/deploy.yml`) pulls this file during deployment. When adding new environment variables:
+1. Add to `.env.example` (as optional/required)
+2. Add to `pandeiro/infra/OpenMoko/env.production` manually
+3. Document in README.md if user-facing
+
 ## Commit and Push Guidelines
 **Never push without explicit user instruction.** Stage and commit changes after completing a task and verifying the work is correct. Always wait for user confirmation before pushing to remote.
 

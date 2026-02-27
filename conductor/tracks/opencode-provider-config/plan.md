@@ -23,16 +23,16 @@ The providers-spike documented how to configure OpenCode Zen/Go providers, but t
 ## Phase 1: Implementation
 
 ### Task 1: Update Entrypoint Script
-- [ ] Task: Add OPENCODE_API_KEY handling to entrypoint.sh
-    - [ ] Check if OPENCODE_API_KEY is set
-    - [ ] Create/update opencode.json with provider config
-    - [ ] Use jq to merge with existing config if present
+- [x] Task: Add OPENCODE_API_KEY handling to entrypoint.sh
+    - [x] Check if OPENCODE_API_KEY is set
+    - [x] Create/update opencode.json with provider config
+    - [x] Use jq to merge with existing config if present
 
 ### Task 2: Verify Configuration
-- [ ] Task: Test the configuration works
-    - [ ] Build Docker image
-    - [ ] Verify opencode.json is created with API key
-    - [ ] Confirm OpenCode can use the provider
+- [x] Task: Test the configuration works
+    - [x] Build Docker image
+    - [x] Verify opencode.json is created with API key
+    - [x] Confirm OpenCode can use the provider
 
 ---
 

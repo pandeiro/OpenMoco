@@ -71,6 +71,7 @@ All traffic routes through port 7777 via the gateway.
 
 | Credential | Purpose |
 |------------|---------|
+| `OPENCODE_API_KEY` | OpenCode Zen/Go provider for agent sessions |
 | `GEMINI_API_KEY` | Primary AI for voice prompt reformulation |
 | `OLLAMA_API_KEY` | Fallback AI for reformulation |
 | `WHISPER_API_KEY` | Improved voice-to-text (OpenAI) |
