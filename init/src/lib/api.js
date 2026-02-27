@@ -35,12 +35,19 @@ export async function transcribeAudio(blob) {
 }
 
 export async function reformulatePrompt(transcript, project) {
+    console.log('[api.js] reformulatePrompt called with transcript:', transcript?.substring(0, 50) + '...');
+    console.log('[api.js] Project:', JSON.stringify(project, null, 2));
     const res = await fetch(`${API_BASE}/reform`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ transcript, project }),
     });
-    if (!res.ok) throw new Error('Reformulation failed');
+    console.log('[api.js] Reformulation response status:', res.status);
+    if (!res.ok) {
+        const errorText = await res.text();
+        console.error('[api.js] Reformulation error response:', errorText);
+        throw new Error('Reformulation failed');
+    }
     return res.json();
 }
 
