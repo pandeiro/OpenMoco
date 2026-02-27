@@ -113,12 +113,13 @@ jobs:
 
       - name: Deploy to Server
         uses: appleboy/ssh-action@master
+        env:
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
         with:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
-          env:
-            DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+          envs: DEPLOY_PATH
           script: |
             echo "Start deploy..."
             cd $DEPLOY_PATH
