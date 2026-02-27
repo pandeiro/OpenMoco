@@ -14,11 +14,11 @@
     - [x] Check current dimensions of logo.png
 
 ### Task 2: Generate Icon Files
-- [ ] Task: Generate PWA icons using ImageMagick
-    - [ ] Create `icon-192.png` (192x192)
-    - [ ] Create `icon-512.png` (512x512)
-    - [ ] Create `favicon.ico` (32x32)
-    - [ ] Place all files in `init/public/icons/`
+- [x] Task: Generate PWA icons using ImageMagick
+    - [x] Create `icon-192.png` (192x192)
+    - [x] Create `icon-512.png` (512x512)
+    - [x] Create `favicon.ico` (32x32)
+    - [x] Place all files in `init/public/icons/`
 
 ### Task 3: Verify Output
 - [ ] Task: Verify generated icons
