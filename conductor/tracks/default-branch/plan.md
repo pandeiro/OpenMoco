@@ -11,22 +11,22 @@ P2 (Medium) | Effort: Small (~30 min)
 
 ---
 
-## Phase 1: Investigation
+## Phase 1: Investigation [checkpoint: n/a]
 
 ### Task 1: Verify GitHub API Response
-- [ ] Task: Verify default_branch field
-    - [ ] Check GitHub API response includes default_branch
-    - [ ] Verify repos.json stores this field
+- [x] Task: Verify default_branch field
+    - [x] Check GitHub API response includes default_branch
+    - [x] Verify repos.json stores this field (already stored in githubMeta.defaultBranch)
 
 ---
 
-## Phase 2: Implementation
+## Phase 2: Implementation [checkpoint: n/a]
 
 ### Task 2: Update repos.js
-- [ ] Task: Use dynamic default branch
-    - [ ] Update clone/reset logic at repos.js:155
-    - [ ] Use `repo.default_branch || 'main'` fallback
-    - [ ] Update git fetch/reset commands
+- [x] Task: Use dynamic default branch
+    - [x] Update clone/reset logic at repos.js:155
+    - [x] Use `repo.default_branch || 'main'` fallback
+    - [x] Update git fetch/reset commands
 
 ---
 
