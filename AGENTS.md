@@ -20,3 +20,19 @@ The project uses a 4-container Docker Compose setup routed through Nginx:
 
 ## Single Source of Truth
 The Product Requirements Document (PRD) at `doc/prd/openmoko-prd-v0.3.md` is the absolute source of truth for architectural constraints and feature behavior. **Always consult the PRD before fundamentally altering how features operate.**
+
+## Post-Push Verification
+After pushing consequential changes (especially to CI/CD workflows), use the `gh` CLI to verify workflow runs:
+
+```bash
+# Check recent workflow runs
+gh run list --workflow=Deploy --limit 5
+
+# View specific job logs
+gh run view --job=<job-id>
+
+# View full job logs
+gh run view --log --job=<job-id>
+```
+
+This helps verify that the deploy succeeded and diagnose issues quickly.

@@ -1,13 +1,6 @@
 #!/bin/bash
 set -e
 
-# Check for required password
-if [ -z "$OPENCODE_SERVER_PASSWORD" ]; then
-    echo "ERROR: OPENCODE_SERVER_PASSWORD environment variable is not set!"
-    echo "Please set OPENCODE_SERVER_PASSWORD in your .env file"
-    exit 1
-fi
-
 # Configure git from environment variables
 if [ -n "$GIT_USER_NAME" ]; then
     git config --global user.name "$GIT_USER_NAME"
@@ -209,6 +202,6 @@ EOF
 echo "Starting OpenCode web server..."
 echo "  Port: 8080"
 echo "  Hostname: 0.0.0.0 (accessible from outside container)"
-echo "  Password auth: ${OPENCODE_SERVER_PASSWORD:+enabled}${OPENCODE_SERVER_PASSWORD:-disabled}"
+echo "  Server ready for SDK connections"
 echo ""
 exec opencode web --port 8080 --hostname 0.0.0.0
