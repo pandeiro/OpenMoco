@@ -30,10 +30,10 @@ P2 (Medium) | Effort: Small (~30 min)
 
 ---
 
-## Phase 3: Verification
+## Phase 3: Verification [checkpoint: 288fa79]
 
 ### Task 3: Test with Different Branches
-- [ ] Task: Manual verification
-    - [ ] Test with repo using `main` as default
-    - [ ] Test with repo using `master` as default
-    - [ ] Clone/reset works correctly for both
+- [x] Task: Manual verification
+    - [x] Test with repo using `main` as default
+    - [x] Test with repo using `master` as default
+    - [x] Clone/reset works correctly for both
