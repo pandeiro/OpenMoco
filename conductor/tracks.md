@@ -4,5 +4,5 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [ ] **Track: Generate PWA Icons**
+- [x] **Track: Generate PWA Icons**
   *Link: [./tracks/pwa-icons_20260227/](./tracks/pwa-icons_20260227/)*
