@@ -11,44 +11,44 @@ P2 (Medium) | Effort: Medium (~2 hours)
 
 ---
 
-## Phase 1: Dependencies
+## Phase 1: Dependencies [checkpoint: n/a]
 
 ### Task 1: Add express-validator
-- [ ] Task: Install express-validator dependency
-    - [ ] Run `npm install express-validator` in events/
-    - [ ] Verify package added to package.json
+- [x] Task: Install express-validator dependency
+    - [x] Run `npm install express-validator` in events/
+    - [x] Verify package added to package.json
 
 ---
 
-## Phase 2: Data Layer Logging
+## Phase 2: Data Layer Logging [checkpoint: n/a]
 
 ### Task 2: Add Error Logging to data.js
-- [ ] Task: Add logging to data layer
-    - [ ] Add error logging to readJSON function
-    - [ ] Add error logging to writeJSON function
-    - [ ] Log file paths and error messages
+- [x] Task: Add logging to data layer
+    - [x] Add error logging to readJSON function
+    - [x] Add error logging to writeJSON function
+    - [x] Log file paths and error messages
 
 ---
 
-## Phase 3: Route Validation
+## Phase 3: Route Validation [checkpoint: n/a]
 
 ### Task 3: Add Validation to repos.js
-- [ ] Task: Add input validation
-    - [ ] Validate owner/name params (alphanumeric)
-    - [ ] Return 400 with clear error messages
+- [x] Task: Add input validation
+    - [x] Validate owner/name params (alphanumeric)
+    - [x] Return 400 with clear error messages
 
 ### Task 4: Add Validation to session.js
-- [ ] Task: Add input validation
-    - [ ] Validate prompt text
-    - [ ] Validate project path
+- [x] Task: Add input validation
+    - [x] Validate prompt text
+    - [x] Validate project path
 
 ### Task 5: Add Validation to subscribe.js
-- [ ] Task: Add input validation
-    - [ ] Validate push subscription data
+- [x] Task: Add input validation
+    - [x] Validate push subscription data
 
 ---
 
-## Phase 4: Verification
+## Phase 4: Verification [checkpoint: n/a]
 
 ### Task 6: Verify Validation
 - [ ] Task: Manual verification

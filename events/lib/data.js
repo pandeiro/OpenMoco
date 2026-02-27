@@ -38,7 +38,8 @@ export async function readJSON(relativePath) {
     try {
         const raw = await readFile(path, 'utf-8');
         return JSON.parse(raw);
-    } catch {
+    } catch (err) {
+        console.error(`[data] Failed to read ${relativePath}:`, err.message);
         return null;
     }
 }
@@ -52,16 +53,26 @@ export async function writeJSON(relativePath, data) {
     await mkdir(dirname(path), { recursive: true });
 
     const tmp = join(tmpdir(), `openmoko-${randomUUID()}.json`);
-    await writeFile(tmp, JSON.stringify(data, null, 2), 'utf-8');
+    
+    try {
+        await writeFile(tmp, JSON.stringify(data, null, 2), 'utf-8');
+    } catch (err) {
+        console.error(`[data] Failed to write temp file for ${relativePath}:`, err.message);
+        throw err;
+    }
 
-    // Rename is atomic on the same filesystem; tmp may be different,
-    // so we copy + unlink as fallback.
     try {
         const { rename } = await import('node:fs/promises');
         await rename(tmp, path);
-    } catch {
-        await writeFile(path, JSON.stringify(data, null, 2), 'utf-8');
-        await unlink(tmp).catch(() => { });
+    } catch (err) {
+        console.error(`[data] Rename failed for ${relativePath}, using fallback:`, err.message);
+        try {
+            await writeFile(path, JSON.stringify(data, null, 2), 'utf-8');
+            await unlink(tmp).catch(() => { });
+        } catch (fallbackErr) {
+            console.error(`[data] Fallback write failed for ${relativePath}:`, fallbackErr.message);
+            throw fallbackErr;
+        }
     }
 }
 

@@ -8,10 +8,19 @@
 import { Router } from 'express';
 import { execSync } from 'node:child_process';
 import { existsSync } from 'node:fs';
+import { param, validationResult } from 'express-validator';
 import { listRepos } from '../lib/github.js';
 import { readJSON, writeJSON } from '../lib/data.js';
 
 const router = Router();
+
+function handleValidationErrors(req, res, next) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+    next();
+}
 
 /**
  * GET /api/repos
@@ -59,7 +68,10 @@ router.get('/', async (_req, res) => {
  * POST /api/repos/:name/enable
  * Clone repo to /workspace and mark as enabled.
  */
-router.post('/:name/enable', async (req, res) => {
+router.post('/:name/enable',
+    param('name').matches(/^[a-zA-Z0-9._-]+$/).withMessage('Invalid repo name'),
+    handleValidationErrors,
+    async (req, res) => {
     const { name } = req.params;
     console.log(`[repos] ===========================================`);
     console.log(`[repos] POST /api/repos/${name}/enable - REQUEST RECEIVED`);
@@ -201,7 +213,10 @@ router.post('/:name/enable', async (req, res) => {
  * POST /api/repos/:name/disable
  * Remove from workspace and mark as disabled.
  */
-router.post('/:name/disable', async (req, res) => {
+router.post('/:name/disable',
+    param('name').matches(/^[a-zA-Z0-9._-]+$/).withMessage('Invalid repo name'),
+    handleValidationErrors,
+    async (req, res) => {
     const { name } = req.params;
 
     try {
