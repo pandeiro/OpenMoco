@@ -43,10 +43,10 @@ P0 (Critical) | Effort: Small (~15 min)
     - [x] Add or update favicon link if missing/incorrect
 
 ### Task 5: Manual Verification
-- [ ] Task: Manual verification
-    - [ ] PWA install prompt appears on mobile
-    - [ ] Icons display correctly on home screen
-    - [ ] Favicon shows in browser tab
+- [x] Task: Manual verification
+    - [x] PWA install prompt appears on mobile
+    - [x] Icons display correctly on home screen
+    - [x] Favicon shows in browser tab
 
 ---
 
