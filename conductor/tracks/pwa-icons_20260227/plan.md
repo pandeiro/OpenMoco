@@ -29,7 +29,7 @@
 
 ---
 
-## Phase 2: Integration & Testing
+## Phase 2: Integration & Testing [checkpoint: a8c246c]
 
 ### Task 4: Update HTML if Needed
 - [x] Task: Verify favicon link in index.html
