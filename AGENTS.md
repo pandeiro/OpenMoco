@@ -21,6 +21,9 @@ The project uses a 4-container Docker Compose setup routed through Nginx:
 ## Single Source of Truth
 The Product Requirements Document (PRD) at `doc/prd/openmoko-prd-v0.3.md` is the absolute source of truth for architectural constraints and feature behavior. **Always consult the PRD before fundamentally altering how features operate.**
 
+## Commit and Push Guidelines
+**Never push without explicit user instruction.** Stage and commit changes after completing a task and verifying the work is correct. Always wait for user confirmation before pushing to remote.
+
 ## Post-Push Verification
 After pushing consequential changes (especially to CI/CD workflows), use the `gh` CLI to verify workflow runs:
 
