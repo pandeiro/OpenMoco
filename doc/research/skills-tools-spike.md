@@ -86,6 +86,22 @@ OpenCode has a rich ecosystem of extensibility options: **Plugins**, **MCP Serve
 | **opencode-background-agents** | Plugin | Async agent delegation | 89 | Overnight coding |
 | **flow-next-opencode** | Plugin | Plan-first workflows | 33 | Ralph autonomous mode |
 
+### Agent Skills (SKILL.md)
+
+| Name | Purpose | Source |
+|------|---------|--------|
+| **frontend-design** | Create distinctive, production-grade UI with high design quality | [pandeiro/claude-skill-forks](https://github.com/pandeiro/claude-skill-forks/tree/main/skills/frontend-design) |
+
+**frontend-design skill** - Guides AI to create distinctive frontend interfaces that avoid generic "AI slop" aesthetics:
+- Bold aesthetic direction (minimalist, maximalist, brutalist, etc.)
+- Typography guidance (avoid Inter, Roboto, Arial)
+- Color commitment and cohesive palettes
+- Motion/animation patterns
+- Spatial composition techniques
+- Background/visual detail patterns
+
+**Installation:** Place in `~/.config/opencode/skills/frontend-design/SKILL.md`
+
 ---
 
 ## MCP Server Configuration Examples
@@ -136,6 +152,7 @@ OpenCode has a rich ecosystem of extensibility options: **Plugins**, **MCP Serve
 
 ### Already Implemented
 - **moko-logger** - Custom plugin for event logging (tokens, tools)
+- **frontend-design** - Skill for high-quality UI design (SKILL.md)
 
 ### Recommended Additions
 

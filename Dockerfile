@@ -30,6 +30,9 @@ RUN CI=true npx create-conductor-flow --agent opencode --scope global --git-igno
 # Install Moko Logger plugin for OpenCode
 COPY opencode-plugin/moko-logger.js /root/.config/opencode/plugin/moko-logger.js
 
+# Install frontend-design skill for OpenCode
+COPY skills/frontend-design/SKILL.md /root/.config/opencode/skills/frontend-design/SKILL.md
+
 # Create workspace directory
 RUN mkdir -p /workspace
 
