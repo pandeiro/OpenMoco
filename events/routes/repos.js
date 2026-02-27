@@ -151,8 +151,9 @@ router.post('/:name/enable', async (req, res) => {
             console.log(`[repos] [STEP 20] Path exists: ${pathExists}`);
             
             if (pathExists) {
-                console.log(`[repos] [STEP 21] Path exists, doing git fetch`);
-                const result = execSync(`git fetch origin main && git reset --hard origin/main`, {
+                const defaultBranch = repos[name].githubMeta?.defaultBranch || 'main';
+                console.log(`[repos] [STEP 21] Path exists, doing git fetch (branch: ${defaultBranch})`);
+                const result = execSync(`git fetch origin ${defaultBranch} && git reset --hard origin/${defaultBranch}`, {
                     cwd: targetPath,
                     timeout: 60_000,
                     stdio: 'pipe',
