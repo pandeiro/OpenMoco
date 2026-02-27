@@ -6,7 +6,7 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ## Active Tracks
 
-- [ ] **Track: pwa-icons** - PWA Icons (`tracks/pwa-icons/plan.md`)
+- [x] **Track: pwa-icons** - PWA Icons (`tracks/pwa-icons/plan.md`) [add2766]
 - [x] **Track: prd-v04** - Create PRD v0.4 (`tracks/prd-v04/plan.md`) [cb65894]
 - [x] **Track: docker-health** - Docker Health Checks (`tracks/docker-health/plan.md`) [d11c403]
 - [x] **Track: readme-reorg** - README Reorganization & Deployment Docs (`tracks/readme-reorg/plan.md`) [4ccf99b]
