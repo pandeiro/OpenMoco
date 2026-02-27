@@ -1,6 +1,6 @@
 services:
   agent:
-    image: pandeiro/openmoko:latest
+    image: openmoko/agent:latest
     container_name: agent
     labels:
       - "logging=enabled"
@@ -22,11 +22,9 @@ services:
     restart: unless-stopped
 
   gateway:
-    build: ./gateway
+    image: openmoko/gateway:latest
     ports:
       - "7777:80"
-    volumes:
-      - ./gateway/nginx.conf:/etc/nginx/nginx.conf:ro
     environment:
       - OPENMOKO_USER=${OPENMOKO_USER}
       - OPENMOKO_PASSWORD=${OPENMOKO_PASSWORD}
@@ -37,16 +35,13 @@ services:
     restart: unless-stopped
 
   init:
-    image: nginx:alpine
-    volumes:
-      - ./init/dist:/usr/share/nginx/html:ro
-      - ./init/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    image: openmoko/init:latest
     expose:
       - "3000"
     restart: unless-stopped
 
   events:
-    build: ./events
+    image: openmoko/events:latest
     env_file: .env
     expose:
       - "3001"
