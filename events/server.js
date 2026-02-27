@@ -1,3 +1,13 @@
+import { config } from 'dotenv';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+// Load .env from parent directory
+config({ path: join(__dirname, '..', '.env') });
+console.log('[server] Loaded .env from:', join(__dirname, '..', '.env'));
+console.log('[server] GITHUB_PAT present:', !!process.env.GITHUB_PAT);
+
 import express from 'express';
 import { ensureDataDir } from './lib/data.js';
 
@@ -13,6 +23,13 @@ import eventsRouter from './routes/events.js';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+// Set default CODE_DIR for local development
+if (!process.env.CODE_DIR) {
+  // Default to repo root/code when running locally
+  process.env.CODE_DIR = join(__dirname, '..', 'code');
+}
+console.log('[server] CODE_DIR:', process.env.CODE_DIR);
 
 // --- Body parsing ---
 // JSON parsing with rawBody capture for webhook HMAC validation
