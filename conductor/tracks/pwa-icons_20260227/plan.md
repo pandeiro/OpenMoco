@@ -21,11 +21,11 @@
     - [x] Place all files in `init/public/icons/`
 
 ### Task 3: Verify Output
-- [ ] Task: Verify generated icons
-    - [ ] Confirm icon-192.png dimensions are correct
-    - [ ] Confirm icon-512.png dimensions are correct
-    - [ ] Confirm favicon.ico exists
-    - [ ] Visual check that icons look correct
+- [x] Task: Verify generated icons
+    - [x] Confirm icon-192.png dimensions are correct
+    - [x] Confirm icon-512.png dimensions are correct
+    - [x] Confirm favicon.ico exists
+    - [x] Visual check that icons look correct
 
 ---
 
