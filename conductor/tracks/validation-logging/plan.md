@@ -48,10 +48,10 @@ P2 (Medium) | Effort: Medium (~2 hours)
 
 ---
 
-## Phase 4: Verification [checkpoint: n/a]
+## Phase 4: Verification [checkpoint: e63b529]
 
 ### Task 6: Verify Validation
-- [ ] Task: Manual verification
-    - [ ] Invalid inputs return 400 with clear error messages
-    - [ ] Error logs appear in console for debugging
-    - [ ] No regressions in existing functionality
+- [x] Task: Manual verification
+    - [x] Invalid inputs return 400 with clear error messages
+    - [x] Error logs appear in console for debugging
+    - [x] No regressions in existing functionality
