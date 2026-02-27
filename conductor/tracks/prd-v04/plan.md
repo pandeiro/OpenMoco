@@ -11,7 +11,7 @@ P0 (Critical) | Effort: Medium (~1 hour)
 
 ---
 
-## Phase 1: Document Updates [checkpoint: n/a]
+## Phase 1: Document Updates [checkpoint: cb65894]
 
 ### Task 1: Create PRD v0.4
 - [x] Task: Create `doc/prd/openmoko-prd-v0.4.md`
@@ -29,14 +29,12 @@ P0 (Critical) | Effort: Medium (~1 hour)
 
 ---
 
-## Phase 2: Status Tracking [checkpoint: n/a]
+## Phase 2: Status Tracking [checkpoint: cb65894]
 
 ### Task 3: Update Status Documents
-- [ ] Task: Create status tracking files
-    - [ ] Create `doc/status/v0.3-completion.md` (mark as complete)
-    - [ ] Create `doc/status/v0.4-progress.md` for tracking
+- [x] Task: Create status tracking files — SKIPPED (using conductor instead)
 
 ### Task 4: Verify Accuracy
-- [ ] Task: Manual verification
-    - [ ] PRD accurately reflects current implementation
-    - [ ] No conflicting information between PRD and code
+- [x] Task: Manual verification
+    - [x] PRD accurately reflects current implementation
+    - [x] No conflicting information between PRD and code
