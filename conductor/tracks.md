@@ -13,7 +13,7 @@ This file tracks all major tracks for the project. Each track has its own detail
 - [x] **Track: validation-logging** - Input Validation & Error Logging (`tracks/validation-logging/plan.md`) [e63b529]
 - [x] **Track: default-branch** - Use Repo Default Branch (`tracks/default-branch/plan.md`) [288fa79]
 - [x] **Track: graceful-shutdown** - Graceful Shutdown (`tracks/graceful-shutdown/plan.md`) [cc55a0c]
-- [ ] **Track: consolidate-agents** - Consolidate Agent Documentation (`tracks/consolidate-agents/plan.md`)
+- [x] **Track: consolidate-agents** - Consolidate Agent Documentation (`tracks/consolidate-agents/plan.md`) [de9c8d3]
 - [ ] **Track: event-capture** - OpenCode Event Capture Plugin (`tracks/event-capture/plan.md`)
 - [ ] **Track: skills-spike** - Skills/Tools Spike (Research) (`tracks/skills-spike/plan.md`)
 - [ ] **Track: providers-spike** - OpenCode Go/Zen API Key Integration Spike (Research) (`tracks/providers-spike/plan.md`)
