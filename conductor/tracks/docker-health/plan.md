@@ -11,25 +11,25 @@ P1 (High) | Effort: Small (~30 min)
 
 ---
 
-## Phase 1: Investigation
+## Phase 1: Investigation [checkpoint: n/a]
 
 ### Task 1: Verify Endpoints
-- [ ] Task: Verify health endpoints exist
-    - [ ] Check if agent has `/health` endpoint (or investigate OpenCode)
-    - [ ] Verify events has `/api/health` endpoint
-    - [ ] Verify init serves root `/`
-    - [ ] Verify gateway serves `/init/`
+- [x] Task: Verify health endpoints exist
+    - [x] Check if agent has `/health` endpoint (or investigate OpenCode)
+    - [x] Verify events has `/api/health` endpoint
+    - [x] Verify init serves root `/`
+    - [x] Verify gateway serves `/init/`
 
 ---
 
-## Phase 2: Implementation
+## Phase 2: Implementation [checkpoint: n/a]
 
 ### Task 2: Add Health Checks
-- [ ] Task: Add healthcheck to docker-compose.yml
-    - [ ] Add healthcheck for agent service
-    - [ ] Add healthcheck for events service
-    - [ ] Add healthcheck for init service
-    - [ ] Add healthcheck for gateway service
+- [x] Task: Add healthcheck to docker-compose.yml
+    - [x] Add healthcheck for agent service (curl, has curl installed)
+    - [x] Add healthcheck for events service (wget, Alpine)
+    - [x] Add healthcheck for init service (wget, Alpine)
+    - [x] Add healthcheck for gateway service (wget, Alpine)
 
 ---
 
