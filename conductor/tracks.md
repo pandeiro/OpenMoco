@@ -15,7 +15,7 @@ This file tracks all major tracks for the project. Each track has its own detail
 - [x] **Track: graceful-shutdown** - Graceful Shutdown (`tracks/graceful-shutdown/plan.md`) [cc55a0c]
 - [x] **Track: consolidate-agents** - Consolidate Agent Documentation (`tracks/consolidate-agents/plan.md`) [de9c8d3]
 - [x] **Track: event-capture** - OpenCode Event Capture Plugin (`tracks/event-capture/plan.md`) [9383e9f]
-- [ ] **Track: skills-spike** - Skills/Tools Spike (Research) (`tracks/skills-spike/plan.md`)
+- [x] **Track: skills-spike** - Skills/Tools Spike (Research) (`tracks/skills-spike/plan.md`) [e51e9be]
 - [ ] **Track: providers-spike** - OpenCode Go/Zen API Key Integration Spike (Research) (`tracks/providers-spike/plan.md`)
 
 ---
