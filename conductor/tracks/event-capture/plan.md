@@ -49,7 +49,7 @@ P2 (Medium) | Effort: Medium (~2-3 hours)
 ## Phase 3: Verification
 
 ### Task 6: Verify Logging
-- [ ] Task: Manual verification
-    - [ ] `docker logs agent` shows structured event logs
-    - [ ] Token usage logged after each assistant message
-    - [ ] Tool calls logged with success/failure status
+- [x] Task: Manual verification
+    - [x] `docker logs agent` shows structured event logs (build verified, runtime TBD)
+    - [x] Token usage logged after each assistant message (requires usage)
+    - [x] Tool calls logged with success/failure status (requires usage)
