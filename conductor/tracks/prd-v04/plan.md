@@ -11,25 +11,25 @@ P0 (Critical) | Effort: Medium (~1 hour)
 
 ---
 
-## Phase 1: Document Updates
+## Phase 1: Document Updates [checkpoint: n/a]
 
 ### Task 1: Create PRD v0.4
-- [ ] Task: Create `doc/prd/openmoko-prd-v0.4.md`
-    - [ ] Copy v0.3 as base
-    - [ ] Update primary reformulation provider to Gemini 2.5 Flash (not Groq)
-    - [ ] Keep Ollama Cloud as fallback
-    - [ ] Document multi-arch Docker builds (optional via workflow_dispatch)
-    - [ ] Update architecture diagrams if needed
+- [x] Task: Create `doc/prd/openmoko-prd-v0.4.md`
+    - [x] Copy v0.3 as base
+    - [x] Update primary reformulation provider to Gemini 2.5 Flash (not Groq)
+    - [x] Keep Ollama Cloud as fallback
+    - [x] Document multi-arch Docker builds (optional via workflow_dispatch)
+    - [x] Update architecture diagrams if needed
 
 ### Task 2: Document v0.4 Features
-- [ ] Task: Add new features to PRD
-    - [ ] OpenCode event capture plugin
-    - [ ] Docker health checks
-    - [ ] Graceful shutdown
+- [x] Task: Add new features to PRD
+    - [x] OpenCode event capture plugin
+    - [x] Docker health checks
+    - [x] Graceful shutdown
 
 ---
 
-## Phase 2: Status Tracking
+## Phase 2: Status Tracking [checkpoint: n/a]
 
 ### Task 3: Update Status Documents
 - [ ] Task: Create status tracking files
