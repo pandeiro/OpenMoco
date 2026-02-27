@@ -14,35 +14,35 @@ P2 (Medium) | Effort: Medium (~2-3 hours)
 ## Phase 1: Plugin Development
 
 ### Task 1: Create Plugin Structure
-- [ ] Task: Set up plugin files
-    - [ ] Create `opencode-plugin/package.json`
-    - [ ] Create `opencode-plugin/moko-logger.ts`
+- [x] Task: Set up plugin files
+    - [x] Create `opencode-plugin/package.json`
+    - [x] Create `opencode-plugin/moko-logger.ts`
 
 ### Task 2: Implement Event Hook
-- [ ] Task: Implement event hook
-    - [ ] Capture `message.updated` events
-    - [ ] Log token counts (input/output)
-    - [ ] Log cost when available
+- [x] Task: Implement event hook
+    - [x] Capture `message.updated` events
+    - [x] Log token counts (input/output)
+    - [x] Log cost when available
 
 ### Task 3: Implement Tool Hooks
-- [ ] Task: Implement tool execute hooks
-    - [ ] Implement `tool.execute.before` hook
-    - [ ] Implement `tool.execute.after` hook
-    - [ ] Log tool name and success/failure status
+- [x] Task: Implement tool execute hooks
+    - [x] Implement `tool.execute.before` hook
+    - [x] Implement `tool.execute.after` hook
+    - [x] Log tool name and success/failure status
 
 ---
 
 ## Phase 2: Docker Integration
 
 ### Task 4: Update Dockerfile
-- [ ] Task: Install plugin in agent container
-    - [ ] Copy plugin files to container
-    - [ ] Place in `/root/.config/opencode/plugin/`
+- [x] Task: Install plugin in agent container
+    - [x] Copy plugin files to container
+    - [x] Place in `/root/.config/opencode/plugin/`
 
 ### Task 5: Configure Plugin
-- [ ] Task: Ensure plugin is loaded
-    - [ ] Verify opencode.json loads plugins
-    - [ ] Or configure via entrypoint.sh
+- [x] Task: Ensure plugin is loaded
+    - [x] Verify opencode.json loads plugins
+    - [x] Or configure via entrypoint.sh
 
 ---
 

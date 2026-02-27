@@ -27,6 +27,15 @@ RUN npm i -g opencode-ai@latest
 # Install Conductor plugin for OpenCode
 RUN CI=true npx create-conductor-flow --agent opencode --scope global --git-ignore none
 
+# Install Moko Logger plugin for OpenCode
+COPY opencode-plugin /tmp/opencode-plugin
+RUN mkdir -p /root/.config/opencode/plugin/moko-logger && \
+    cp /tmp/opencode-plugin/package.json /root/.config/opencode/plugin/moko-logger/ && \
+    cp /tmp/opencode-plugin/moko-logger.ts /root/.config/opencode/plugin/moko-logger/ && \
+    cd /root/.config/opencode/plugin/moko-logger && \
+    npm install --silent && \
+    rm -rf /tmp/opencode-plugin
+
 # Create workspace directory
 RUN mkdir -p /workspace
 
