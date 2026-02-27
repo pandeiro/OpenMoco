@@ -67,7 +67,9 @@ export async function render() {
         card.appendChild(action);
 
         card.onclick = async () => {
+            console.log('[repos.js] Card clicked for repo:', repo.name, 'hasCloneError:', hasCloneError);
             if (isNewProject) {
+                console.log('[repos.js] New project selected, navigating');
                 navigate('/init/?new=true');
                 return;
             }
@@ -75,10 +77,14 @@ export async function render() {
             info.innerHTML += `<div style="font-size: 0.75rem; color: var(--primary); margin-top: 0.5rem;">Preparing workspace...</div>`;
             card.style.pointerEvents = 'none';
             card.style.opacity = '0.7';
+            console.log('[repos.js] Calling enableRepo for:', repo.name);
             try {
-                await enableRepo(repo.name);
-                navigate('/init/');
+                const result = await enableRepo(repo.name);
+                console.log('[repos.js] enableRepo succeeded:', result);
+                navigate(`/init/?repo=${encodeURIComponent(repo.name)}`);
             } catch (err) {
+                console.error('[repos.js] enableRepo FAILED:', err);
+                console.error('[repos.js] Error message:', err.message);
                 alert('Failed to set up project: ' + err.message);
                 card.style.pointerEvents = 'auto';
                 card.style.opacity = '1';

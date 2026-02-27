@@ -53,19 +53,30 @@ export async function render() {
 
             const params = new URLSearchParams(window.location.search);
             const isNew = params.get('new') === 'true';
+            const selectedRepoName = params.get('repo');
 
             if (isNew) {
                 selectedRepo = { name: 'New Project', isNew: true };
             } else if (repos.length === 0) {
                 navigate('/init/welcome');
                 return;
+            } else if (selectedRepoName) {
+                // User explicitly selected a repo from the list
+                selectedRepo = repos.find(r => r.name === selectedRepoName);
+                if (!selectedRepo) {
+                    console.log('[home.js] Selected repo not found in enabled repos, defaulting to most recent');
+                    repos.sort((a, b) => new Date(b.enabledAt || 0) - new Date(a.enabledAt || 0));
+                    selectedRepo = repos[0];
+                }
+                console.log('[home.js] Selected repo (from URL):', selectedRepo?.name, 'cloneStatus:', selectedRepo?.cloneStatus);
             } else {
                 console.log('[home.js] BEFORE SORT - repos count:', repos.length);
                 console.log('[home.js] All enabled repos:', repos.map(r => ({name: r.name, cloneStatus: r.cloneStatus, enabledAt: r.enabledAt})));
                 repos.sort((a, b) => new Date(b.enabledAt || 0) - new Date(a.enabledAt || 0));
                 console.log('[home.js] AFTER SORT - first repo:', repos[0]?.name, 'cloneStatus:', repos[0]?.cloneStatus);
-                selectedRepo = activeSession ? repos.find(r => r.name === activeSession.repo) || repos[0] : repos[0];
-                console.log('[home.js] Selected repo:', selectedRepo?.name, 'cloneStatus:', selectedRepo?.cloneStatus);
+                // Use most recently enabled repo (repos[0] after sort), ignore stale activeSession
+                selectedRepo = repos[0];
+                console.log('[home.js] Selected repo (most recent):', selectedRepo?.name, 'cloneStatus:', selectedRepo?.cloneStatus);
                 
                 // Check if selected repo has clone error - redirect to repos if so
                 console.log('[home.js] Checking cloneStatus === error:', selectedRepo?.cloneStatus === 'error');

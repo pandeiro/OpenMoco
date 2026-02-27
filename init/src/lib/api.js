@@ -11,9 +11,24 @@ export async function fetchRepos() {
 }
 
 export async function enableRepo(name) {
-    const res = await fetch(`${API_BASE}/repos/${name}/enable`, { method: 'POST' });
-    if (!res.ok) throw new Error('Failed to enable repo');
-    return res.json();
+    console.log(`[api.js] enableRepo called for: ${name}`);
+    const url = `${API_BASE}/repos/${name}/enable`;
+    console.log(`[api.js] POST ${url}`);
+    try {
+        const res = await fetch(url, { method: 'POST' });
+        console.log(`[api.js] Response status: ${res.status}`);
+        if (!res.ok) {
+            const text = await res.text();
+            console.error(`[api.js] Error response: ${text}`);
+            throw new Error('Failed to enable repo');
+        }
+        const data = await res.json();
+        console.log(`[api.js] Success:`, data);
+        return data;
+    } catch (err) {
+        console.error(`[api.js] fetch failed:`, err);
+        throw err;
+    }
 }
 
 export async function disableRepo(name) {
