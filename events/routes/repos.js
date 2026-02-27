@@ -18,25 +18,39 @@ const router = Router();
  * Merge GitHub repos with local enabled state.
  */
 router.get('/', async (_req, res) => {
+    console.log('[repos] GET /api/repos - starting fetch');
     try {
+        console.log('[repos] Fetching GitHub repos and local state...');
         const [githubRepos, localState] = await Promise.all([
             listRepos(),
             readJSON('repos.json') || {},
         ]);
+        console.log('[repos] GitHub repos fetched:', githubRepos.length);
 
+        const CODE_DIR = process.env.CODE_DIR || '/code';
         const merged = githubRepos.map((repo) => {
             const local = localState[repo.name] || {};
+            const targetPath = `${CODE_DIR}/${repo.name}`;
+            
+            // Verify filesystem state matches JSON state
+            let cloneStatus = local.cloneStatus || null;
+            if (local.enabled && cloneStatus === 'ready' && !existsSync(targetPath)) {
+                console.log(`[repos] WARNING: ${repo.name} marked as ready but path doesn't exist: ${targetPath}`);
+                cloneStatus = 'error';
+            }
+            
             return {
                 ...repo,
                 enabled: local.enabled || false,
-                cloneStatus: local.cloneStatus || null,
+                cloneStatus: cloneStatus,
                 enabledAt: local.enabledAt || null,
             };
         });
 
         res.json(merged);
     } catch (err) {
-        console.error('GET /api/repos error:', err.message);
+        console.error('[repos] GET /api/repos ERROR:', err.message);
+        console.error('[repos] Error stack:', err.stack);
         res.status(500).json({ error: err.message });
     }
 });
@@ -82,7 +96,8 @@ router.post('/:name/enable', async (req, res) => {
 
         // Clone (use SSH URL for private repos, HTTPS for public)
         const cloneUrl = repo.private ? repo.sshUrl : repo.cloneUrl;
-        const targetPath = `/code/${name}`;
+        const CODE_DIR = process.env.CODE_DIR || '/code';
+        const targetPath = `${CODE_DIR}/${name}`;
 
         try {
             if (existsSync(targetPath)) {
@@ -124,7 +139,8 @@ router.post('/:name/disable', async (req, res) => {
         const repos = (await readJSON('repos.json')) || {};
 
         // Remove from filesystem
-        const targetPath = `/code/${name}`;
+        const CODE_DIR = process.env.CODE_DIR || '/code';
+        const targetPath = `${CODE_DIR}/${name}`;
         try {
             execSync(`rm -rf ${targetPath}`, { stdio: 'pipe' });
         } catch (err) {
