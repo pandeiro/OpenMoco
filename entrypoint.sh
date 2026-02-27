@@ -160,11 +160,11 @@ fi
 
 # Set up custom PS1 and mise initialization
 cat > /root/.bashrc <<'EOF'
-# MoCo shell initialization
+# Moko shell initialization
 export PATH="/root/.local/bin:/root/.local/share/mise/bin:/root/.local/share/mise/shims:$PATH"
 eval "$(mise activate bash)"
 
-# Custom MoCo PS1
+# Custom Moko PS1
 parse_git_status() {
     if ! git rev-parse --git-dir > /dev/null 2>&1; then
         return
