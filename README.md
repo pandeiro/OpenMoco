@@ -61,6 +61,20 @@ docker compose up --build -d
 
 > **Note:** For production VPS deployments with HTTPS and domain setup, see [Deployment](doc/deployment.md).
 
+### Multi-architecture Builds
+
+For ARM64 support (Apple Silicon Macs, Raspberry Pi, etc.), you can build multi-architecture images
+by triggering the deploy workflow manually with the `multi_arch` option enabled:
+
+1. Go to the [GitHub Actions](https://github.com/pandeiro/OpenMoko/actions/workflows/deploy.yml) page
+2. Click "Run workflow"
+3. Select the `main` branch
+4. Check "Build multi-architecture images (amd64 and arm64)"
+5. Click "Run workflow"
+
+This will build images for both `linux/amd64` and `linux/arm64` platforms, which will work on both
+Intel and ARM-based systems.
+
 ## Configuration
 
 ### Environment Variables (.env)
