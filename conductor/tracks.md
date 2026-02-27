@@ -20,6 +20,14 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
+## Pending Tracks
+
+- [ ] **Track: opencode-provider-config** - OpenCode Provider Config Implementation (`tracks/opencode-provider-config/plan.md`)
+- [ ] **Track: mcp-servers** - MCP Servers Integration (`tracks/mcp-servers/plan.md`)
+- [ ] **Track: opencode-plugins** - OpenCode Plugins Installation (`tracks/opencode-plugins/plan.md`)
+
+---
+
 ## Archived Tracks
 
 (none)
