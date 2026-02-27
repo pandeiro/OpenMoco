@@ -18,6 +18,17 @@ The project uses a 4-container Docker Compose setup routed through Nginx:
 - **Transcription UX Flow**: In `init/src/lib/speech.js`, we use the Web Speech API with a custom timeout loop: 2.5s of silence triggers a "PAUSED" state, revealing a 1-second "Continue Talking" grace-period button before automatically processing the transcript.
 - **Frontend Styling**: Native CSS variables in `init/src/style.css` support robust light and dark modes via `@media (prefers-color-scheme: dark)`.
 
+## Local Development Setup
+For debugging init locally, run the services separately:
+```bash
+# Terminal 1: Events backend (requires .env)
+cd events && DATA_DIR=../events_data CODE_DIR=../code npm run dev
+
+# Terminal 2: Init frontend with API proxy
+cd init && npm run dev
+```
+The init Vite dev server proxies `/api/*` to `localhost:3001`. Ensure you have API keys (GEMINI_API_KEY, GITHUB_PAT) in your `.env` file.
+
 ## Single Source of Truth
 The Product Requirements Document (PRD) at `doc/prd/openmoko-prd-v0.3.md` is the absolute source of truth for architectural constraints and feature behavior. **Always consult the PRD before fundamentally altering how features operate.**
 
