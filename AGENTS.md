@@ -9,7 +9,7 @@ OpenMoko is a voice-first, progressive web app (PWA) wrapper around OpenCode. It
 The project uses a 4-container Docker Compose setup routed through Nginx:
 1. **`agent`**: The core AI agent environment (runs on `:8080` internally).
 2. **`gateway`**: The ingress router (`:7777` mapped to `:80`). See `gateway/nginx.conf`.
-3. **`events`**: A Node.js backend (`:3001` internally). Handles GitHub API routing, Webhooks, Push Notifications, Audio Transcription (Whisper), and LLM Reformulation (Groq/Gemini).
+3. **`events`**: A Node.js backend (`:3001` internally). Handles GitHub API routing, Webhooks, Push Notifications, Audio Transcription (Whisper), and LLM Reformulation (Gemini 2.5 Flash primary, Ollama fallback).
 4. **`init`**: The Vite-built frontend PWA running on `:3000` internally.
 
 ## Key Technical Decisions
@@ -30,7 +30,7 @@ cd init && npm run dev
 The init Vite dev server proxies `/api/*` to `localhost:3001`. Ensure you have API keys (GEMINI_API_KEY, GITHUB_PAT) in your `.env` file.
 
 ## Single Source of Truth
-The Product Requirements Document (PRD) at `doc/prd/openmoko-prd-v0.3.md` is the absolute source of truth for architectural constraints and feature behavior. **Always consult the PRD before fundamentally altering how features operate.**
+The Product Requirements Document (PRD) at `doc/prd/openmoko-prd-v0.4.md` is the absolute source of truth for architectural constraints and feature behavior. **Always consult the PRD before fundamentally altering how features operate.**
 
 ## Commit and Push Guidelines
 **Never push without explicit user instruction.** Stage and commit changes after completing a task and verifying the work is correct. Always wait for user confirmation before pushing to remote.

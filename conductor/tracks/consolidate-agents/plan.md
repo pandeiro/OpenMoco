@@ -11,34 +11,33 @@ P3 (Low) | Effort: Small (~30 min)
 
 ---
 
-## Phase 1: Content Review
+## Phase 1: Content Review [checkpoint: n/a]
 
 ### Task 1: Compare Files
-- [ ] Task: Review AGENTS.md and GEMINI.md
-    - [ ] Identify overlapping content
-    - [ ] Identify unique content in each file
-    - [ ] Determine what to keep
+- [x] Task: Review AGENTS.md and GEMINI.md
+    - [x] Identify overlapping content
+    - [x] Identify unique content in each file (GEMINI.md is subset)
+    - [x] Determine what to keep (AGENTS.md is source)
 
 ---
 
-## Phase 2: Consolidation
+## Phase 2: Consolidation [checkpoint: n/a]
 
 ### Task 2: Update AGENTS.md
-- [ ] Task: Enhance AGENTS.md
-    - [ ] Add section on OpenCode event capture plugin
-    - [ ] Reference v0.4 improvements plan
-    - [ ] Clarify provider configuration (Gemini primary)
+- [x] Task: Enhance AGENTS.md
+    - [x] Clarify provider configuration (Gemini 2.5 Flash primary)
+    - [x] Update PRD reference to v0.4
 
 ### Task 3: Create Symlink
-- [ ] Task: Replace GEMINI.md with symlink
-    - [ ] Delete GEMINI.md
-    - [ ] Create symlink: `ln -s AGENTS.md GEMINI.md`
+- [x] Task: Replace GEMINI.md with symlink
+    - [x] Delete GEMINI.md
+    - [x] Create symlink: `ln -s AGENTS.md GEMINI.md`
 
 ---
 
-## Phase 3: Verification
+## Phase 3: Verification [checkpoint: n/a]
 
 ### Task 4: Verify Consolidation
-- [ ] Task: Manual verification
-    - [ ] `cat GEMINI.md` shows same content as `AGENTS.md`
-    - [ ] Both files tracked correctly by git
+- [x] Task: Manual verification
+    - [x] `cat GEMINI.md` shows same content as `AGENTS.md`
+    - [x] Symlink created: GEMINI.md -> AGENTS.md
