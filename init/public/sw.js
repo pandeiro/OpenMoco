@@ -5,7 +5,21 @@ const ASSETS_TO_CACHE = [
     '/init/manifest.json',
 ];
 
+// Check if we're in development mode
+const isDevMode = self.location.hostname === 'localhost' || 
+                  self.location.hostname === '127.0.0.1' ||
+                  self.location.port === '5173'; // Vite dev server port
+
+if (isDevMode) {
+    console.log('[SW] Dev mode detected - caching disabled');
+}
+
 self.addEventListener('install', (event) => {
+    if (isDevMode) {
+        self.skipWaiting();
+        return;
+    }
+    
     event.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
             return cache.addAll(ASSETS_TO_CACHE);
@@ -15,6 +29,19 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('activate', (event) => {
+    if (isDevMode) {
+        // Clear all caches in dev mode
+        event.waitUntil(
+            caches.keys().then((cacheNames) => {
+                return Promise.all(
+                    cacheNames.map((cacheName) => caches.delete(cacheName))
+                );
+            })
+        );
+        self.clients.claim();
+        return;
+    }
+    
     event.waitUntil(
         caches.keys().then((cacheNames) => {
             return Promise.all(
@@ -30,6 +57,11 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+    // In dev mode: just pass through all requests
+    if (isDevMode) {
+        return;
+    }
+    
     // Only cache GET requests from our own origin
     if (event.request.method !== 'GET' || !event.request.url.startsWith(self.location.origin)) {
         return;
