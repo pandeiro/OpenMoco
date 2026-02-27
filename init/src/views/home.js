@@ -2,6 +2,10 @@ import { fetchRepos, fetchActiveSession, transcribeAudio, reformulatePrompt, cre
 import { SpeechManager } from '../lib/speech.js';
 
 export async function render() {
+    console.log('[home.js] Render started. Browser info:', navigator.userAgent);
+    console.log('[home.js] Platform:', navigator.platform);
+    console.log('[home.js] Language:', navigator.language);
+    
     const container = document.createElement('div');
     container.className = 'animate-fade-in';
 
@@ -33,12 +37,17 @@ export async function render() {
     );
 
     async function init() {
+        console.log('[home.js] init() starting - loading context...');
         main.innerHTML = '<p style="text-align: center; opacity: 0.5; margin-top: 4rem;">Loading context...</p>';
         try {
+            console.log('[home.js] Fetching repos and active session...');
             const [reposRes, sessionRes] = await Promise.all([
                 fetchRepos(),
                 fetchActiveSession()
             ]);
+            console.log('[home.js] Repos loaded:', reposRes.length, 'total,', reposRes.filter(r => r.enabled).length, 'enabled');
+            console.log('[home.js] Active session:', sessionRes);
+            console.log('[home.js] First repo data:', JSON.stringify(reposRes[0], null, 2));
             repos = reposRes.filter(r => r.enabled);
             activeSession = sessionRes;
 
@@ -51,8 +60,20 @@ export async function render() {
                 navigate('/init/welcome');
                 return;
             } else {
+                console.log('[home.js] BEFORE SORT - repos count:', repos.length);
+                console.log('[home.js] All enabled repos:', repos.map(r => ({name: r.name, cloneStatus: r.cloneStatus, enabledAt: r.enabledAt})));
                 repos.sort((a, b) => new Date(b.enabledAt || 0) - new Date(a.enabledAt || 0));
+                console.log('[home.js] AFTER SORT - first repo:', repos[0]?.name, 'cloneStatus:', repos[0]?.cloneStatus);
                 selectedRepo = activeSession ? repos.find(r => r.name === activeSession.repo) || repos[0] : repos[0];
+                console.log('[home.js] Selected repo:', selectedRepo?.name, 'cloneStatus:', selectedRepo?.cloneStatus);
+                
+                // Check if selected repo has clone error - redirect to repos if so
+                console.log('[home.js] Checking cloneStatus === error:', selectedRepo?.cloneStatus === 'error');
+                if (selectedRepo.cloneStatus === 'error') {
+                    console.log('[home.js] >>> REDIRECTING to repos because cloneStatus is error');
+                    navigate('/init/repos');
+                    return;
+                }
             }
 
             renderHome();
@@ -62,14 +83,18 @@ export async function render() {
     }
 
     function handleTranscription(text, isFinal) {
+        console.log('[home.js] handleTranscription called:', text.substring(0, 50) + '...', 'isFinal:', isFinal);
         currentTranscript = text;
         const transcriptEl = document.getElementById('live-transcript');
         if (transcriptEl) {
             transcriptEl.innerText = text;
+        } else {
+            console.warn('[home.js] live-transcript element not found in DOM');
         }
     }
 
     async function updateUI(state) {
+        console.log('[home.js] updateUI called with state:', state);
         if (state === 'TRANSCRIBING') {
             renderProcessing('Improving transcript...');
             try {
@@ -88,6 +113,8 @@ export async function render() {
         } else if (state === 'REFORMULATING') {
             renderProcessing('Reformulating...');
             reformulationError = null; // Reset error before new attempt
+            console.log('[home.js] REFORMULATING state. selectedRepo:', JSON.stringify(selectedRepo, null, 2));
+            console.log('[home.js] currentTranscript:', currentTranscript);
             try {
                 const project = selectedRepo.isNew ? { name: "New Project", isNew: true } : {
                     name: selectedRepo.name,
@@ -95,6 +122,7 @@ export async function render() {
                     defaultBranch: selectedRepo.defaultBranch,
                     lastPushed: selectedRepo.lastPushed
                 };
+                console.log('[home.js] Sending project to reformulate:', JSON.stringify(project, null, 2));
                 reformulatedData = await reformulatePrompt(currentTranscript, project);
                 speech.setState('REVIEWING');
             } catch (err) {
@@ -117,18 +145,28 @@ export async function render() {
         const projectDisplay = document.createElement('div');
         projectDisplay.className = 'card glass';
         projectDisplay.style.display = 'flex';
-        projectDisplay.style.justifyContent = 'space-between';
-        projectDisplay.style.alignItems = 'center';
+        projectDisplay.style.flexDirection = 'column';
         projectDisplay.style.padding = '1rem 1.5rem';
         projectDisplay.style.marginBottom = '2rem';
+        
+        const hasCloneError = selectedRepo.enabled && selectedRepo.cloneStatus === 'error';
+        
         projectDisplay.innerHTML = `
-            <div>
-                <div style="font-size: 0.8rem; color: var(--fg-dim); margin-bottom: 0.25rem;">CURRENT PROJECT</div>
-                <div style="font-weight: 600; font-size: 1.1rem;">${selectedRepo.name}</div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <div style="font-size: 0.8rem; color: var(--fg-dim); margin-bottom: 0.25rem;">CURRENT PROJECT</div>
+                    <div style="font-weight: 600; font-size: 1.1rem;">${selectedRepo.name}</div>
+                </div>
+                <button class="icon-btn" onclick="navigate('/init/repos')" style="background: rgba(255,255,255,0.05);">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                </button>
             </div>
-            <button class="icon-btn" onclick="navigate('/init/repos')" style="background: rgba(255,255,255,0.05);">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-            </button>
+            ${hasCloneError ? `
+                <div style="margin-top: 1rem; padding: 0.75rem; background: rgba(239, 68, 68, 0.1); border: 1px solid var(--error); border-radius: 0.5rem;">
+                    <div style="color: var(--error); font-size: 0.9rem; font-weight: 500;">⚠️ Workspace not ready</div>
+                    <div style="color: var(--fg-dim); font-size: 0.8rem; margin-top: 0.25rem;">This project needs to be cloned. Go to project selection to retry.</div>
+                </div>
+            ` : ''}
         `;
         main.appendChild(projectDisplay);
 
@@ -164,6 +202,7 @@ export async function render() {
             '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8"/></svg>';
 
         micBtn.onclick = () => {
+            console.log('[home.js] Mic button clicked. Current speech state:', speech.state);
             if (speech.state === 'IDLE') {
                 speech.start();
             } else if (isActiveContext) {

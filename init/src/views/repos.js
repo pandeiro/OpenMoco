@@ -39,14 +39,26 @@ export async function render() {
         card.style.cursor = 'pointer';
         card.style.transition = 'all 0.2s';
 
-        card.onmouseover = () => card.style.borderColor = 'var(--primary)';
-        card.onmouseout = () => card.style.borderColor = 'var(--border)';
+        const hasCloneError = repo.enabled && repo.cloneStatus === 'error';
+        
+        // Red border for clone errors
+        if (hasCloneError) {
+            card.style.borderColor = 'var(--error)';
+            card.style.borderWidth = '2px';
+        }
+
+        card.onmouseover = () => card.style.borderColor = hasCloneError ? 'var(--error)' : 'var(--primary)';
+        card.onmouseout = () => card.style.borderColor = hasCloneError ? 'var(--error)' : 'var(--border)';
 
         const info = document.createElement('div');
         info.innerHTML = `
             <div style="font-weight: 600; margin-bottom: 0.25rem; font-size: 1.1rem;">${repo.name}</div>
             <div style="font-size: 0.85rem; color: var(--fg-dim);">${repo.description || (isNewProject ? 'Setup a new blank project' : 'No description')}</div>
-            ${repo.enabled && !isNewProject ? `<div style="font-size: 0.75rem; color: var(--accent); margin-top: 0.5rem;">Downloaded in workspace</div>` : ''}
+            ${repo.enabled && !isNewProject ? 
+                hasCloneError ? 
+                    `<div style="font-size: 0.75rem; color: var(--error); margin-top: 0.5rem; font-weight: 600;">⚠️ Clone failed - click to retry</div>` :
+                    `<div style="font-size: 0.75rem; color: var(--accent); margin-top: 0.5rem;">Downloaded in workspace</div>` 
+                : ''}
         `;
         card.appendChild(info);
 
@@ -87,10 +99,16 @@ export async function render() {
             repoList.appendChild(newProjectCard);
         }
 
-        // 2. Recent Projects
+        // 2. Recent Projects - sort by clone error first, then by date
         const recentRepos = repos
             .filter(r => r.enabled && r.enabledAt)
-            .sort((a, b) => new Date(b.enabledAt) - new Date(a.enabledAt))
+            .sort((a, b) => {
+                // Show repos with clone errors first
+                if (a.cloneStatus === 'error' && b.cloneStatus !== 'error') return -1;
+                if (b.cloneStatus === 'error' && a.cloneStatus !== 'error') return 1;
+                // Then sort by date
+                return new Date(b.enabledAt) - new Date(a.enabledAt);
+            })
             .slice(0, 5)
             .filter(r => r.name.toLowerCase().includes(filter));
 
