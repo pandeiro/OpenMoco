@@ -45,6 +45,9 @@ RUN mkdir -p /workspace
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
+# Set NODE_PATH to include global npm modules
+ENV NODE_PATH=/usr/local/lib/node_modules
+
 WORKDIR /workspace
 
 # Expose OpenCode default port (adjust if different)
