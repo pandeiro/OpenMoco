@@ -185,6 +185,19 @@ OpenCode has a rich ecosystem of extensibility options: **Plugins**, **MCP Serve
 2. **MCP Servers** - Configure in `/root/.config/opencode/opencode.json`
 3. **Skills** - Place in `/root/.config/opencode/skills/<name>/SKILL.md`
 
+### MCP Servers Implemented (2026-02-27)
+
+**Context7** - Added to `entrypoint.sh` for automatic configuration:
+- Type: Remote MCP (no auth required for free tier)
+- URL: `https://mcp.context7.com/mcp`
+- Purpose: Up-to-date documentation lookup for libraries
+- Note: Optional `CONTEXT7_API_KEY` for higher rate limits
+
+**GitHub MCP** - Deferred:
+- Requires OAuth browser flow for authentication
+- Not suitable for headless container environment
+- Could be added later with manual `opencode mcp auth github` after container start
+
 ### For Init PWA (Future Enhancement)
 
 - Display plugin/MCP status in settings

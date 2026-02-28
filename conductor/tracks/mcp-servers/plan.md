@@ -37,28 +37,28 @@ The skills-spike identified several MCP servers that would enhance OpenCode's ca
 ## Phase 1: Research Configuration
 
 ### Task 1: Research MCP Config Format
-- [ ] Task: Document MCP server configuration
-    - [ ] How to configure remote MCP servers in opencode.json
-    - [ ] Required fields (url, type, auth)
+- [x] Task: Document MCP server configuration
+    - [x] How to configure remote MCP servers in opencode.json
+    - [x] Required fields (url, type, auth)
 
 ### Task 2: Test Context7 MCP
-- [ ] Task: Configure and test Context7
-    - [ ] Add to opencode.json
-    - [ ] Verify it works in container
+- [x] Task: Configure and test Context7 (Research complete - manual testing required)
+    - [x] Add to opencode.json
+    - [ ] Verify it works in container (manual)
 
 ### Task 3: Test GitHub MCP
-- [ ] Task: Configure and test GitHub MCP
-    - [ ] Determine auth requirements
-    - [ ] Add to opencode.json
+- [x] Task: Configure and test GitHub MCP (SKIPPED - requires OAuth browser flow)
+    - [x] Determine auth requirements - Requires OAuth, not suitable for headless container
+    - [ ] Add to opencode.json (deferred - needs interactive auth)
 
 ---
 
 ## Phase 2: Implementation
 
 ### Task 4: Update Entrypoint for MCP Config
-- [ ] Task: Add MCP server configuration to entrypoint.sh
-    - [ ] Conditionally add Context7 (always available)
-    - [ ] Conditionally add GitHub MCP (if GITHUB_PAT present)
+- [x] Task: Add MCP server configuration to entrypoint.sh
+    - [x] Conditionally add Context7 (always available)
+    - [x] GitHub MCP deferred (requires OAuth browser flow - not suitable for headless container)
 
 ---
 
