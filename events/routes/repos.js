@@ -84,7 +84,7 @@ router.post('/:name/enable',
         console.log(`[repos] [STEP 3] Read repos.json, got ${Object.keys(repos).length} repos`);
         
         console.log(`[repos] [STEP 4] Checking if ${name} is already enabled and ready`);
-        console.log(`[repos] [STEP 4a] repos[${name}]:`, repos[name]);
+        console.log(`[repos] [STEP 4a] repos[${name}]:`, JSON.stringify(repos[name]));
         console.log(`[repos] [STEP 4b] repos[${name}]?.enabled:`, repos[name]?.enabled);
         console.log(`[repos] [STEP 4c] repos[${name}]?.cloneStatus:`, repos[name]?.cloneStatus);
         
