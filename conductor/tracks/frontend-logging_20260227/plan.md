@@ -31,10 +31,10 @@
 
 ## Phase 3: Integration & Verification
 
-- [ ] Task: End-to-end verification
-    - [ ] Rebuild Docker containers with new nginx config
-    - [ ] Open PWA in browser and trigger console logs
-    - [ ] Run `docker logs <init-container>` and verify frontend logs appear
-    - [ ] Confirm logs are JSON structured with `"source":"frontend"`
+- [x] Task: End-to-end verification
+    - [x] Rebuild Docker containers with new nginx config
+    - [x] Open PWA in browser and trigger console logs
+    - [x] Run `docker logs <init-container>` and verify frontend logs appear
+    - [x] Confirm logs are JSON structured with `"source":"frontend"`
 
 - [ ] Task: Conductor - User Manual Verification 'Integration & Verification' (Protocol in workflow.md)
