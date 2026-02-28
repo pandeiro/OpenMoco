@@ -22,13 +22,13 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ## Pending Tracks
 
-- [x] **Track: Frontend Console Log Exporter**
-*Link: [./tracks/frontend-logging_20260227/](./tracks/frontend-logging_20260227/)*
+(None - all tracks complete)
 
 ---
 
 ## Archived Tracks
 
+- [x] **Track: Frontend Console Log Exporter** (`archive/frontend-logging_20260227/plan.md`)
 - [x] **Track: opencode-plugins** - OpenCode Plugins Installation (`archive/opencode-plugins/plan.md`) [5d323d3]
 - [x] **Track: mcp-servers** - MCP Servers Integration (`archive/mcp-servers/plan.md`) [80c4399]
 - [x] **Track: opencode-provider-config** - OpenCode Provider Config Implementation (`archive/opencode-provider-config/plan.md`) [7788e85]
