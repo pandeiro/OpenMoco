@@ -22,7 +22,7 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ## Pending Tracks
 
-- [ ] **Track: opencode-plugins** - OpenCode Plugins Installation (`tracks/opencode-plugins/plan.md`)
+- [~] **Track: opencode-plugins** - OpenCode Plugins Installation (`tracks/opencode-plugins/plan.md`)
 
 ---
 
