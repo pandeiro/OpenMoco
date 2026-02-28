@@ -49,7 +49,7 @@ The skills-spike identified several plugins that would enhance OpenCode's capabi
     - [x] Compatibility with containerized OpenCode
 
 ### Task 3: Evaluate opencode-quota
-- [x] Task: Research opencode-quota requirements [skipped]
+- [x] Task: Research opencode-quota requirements [skipped - 1a60e88]
     - Decision: User declined quota plugin - moko-logger already provides token tracking
 
 ---
@@ -57,7 +57,7 @@ The skills-spike identified several plugins that would enhance OpenCode's capabi
 ## Phase 2: Implementation
 
 ### Task 4: Document Plugin Decisions
-- [x] Task: Update documentation with plugin evaluation results
+- [x] Task: Update documentation with plugin evaluation results [1a60e88]
     - [x] Update skills-tools-spike.md with implementation notes
     - [x] Document that no additional plugins are needed
     - [x] Record reasoning for future reference
