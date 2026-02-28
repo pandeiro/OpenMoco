@@ -8,8 +8,14 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 - [x] **Track: pwa-icons** - PWA Icons (`tracks/pwa-icons/plan.md`) [add2766]
 - [x] **Track: prd-v04** - Create PRD v0.4 (`tracks/prd-v04/plan.md`) [cb65894]
-- [x] **Track: docker-health** - Docker Health Checks (`tracks/docker-health/plan.md`) [d11c403]
 - [x] **Track: readme-reorg** - README Reorganization & Deployment Docs (`tracks/readme-reorg/plan.md`) [4ccf99b]
+...
+---
+
+## Archived Tracks
+
+- [x] **Track: docker-health** - Docker Health Checks (`archive/docker-health_20260228/plan.md`) [397b8db]
+- [x] **Track: Frontend Console Log Exporter** (`archive/frontend-logging_20260227/plan.md`)
 - [x] **Track: validation-logging** - Input Validation & Error Logging (`tracks/validation-logging/plan.md`) [e63b529]
 - [x] **Track: default-branch** - Use Repo Default Branch (`tracks/default-branch/plan.md`) [288fa79]
 - [x] **Track: graceful-shutdown** - Graceful Shutdown (`tracks/graceful-shutdown/plan.md`) [cc55a0c]
