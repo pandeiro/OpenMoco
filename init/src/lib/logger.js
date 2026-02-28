@@ -3,7 +3,20 @@
  * Overrides console methods to forward logs to the server for Docker capture.
  */
 
-const LOG_ENDPOINT = '/api/logs';
+const LOG_ENDPOINT = '/init/api/logs';
+
+function generateSessionId() {
+    if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+        return crypto.randomUUID();
+    }
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+        const r = Math.random() * 16 | 0;
+        const v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+}
+
+const sessionId = generateSessionId();
 
 const originalConsole = {
     log: console.log.bind(console),
@@ -26,6 +39,7 @@ function serializeArgs(args) {
 function sendLog(level, ...args) {
     const payload = {
         source: 'frontend',
+        sessionId,
         level,
         message: serializeArgs(args),
         timestamp: new Date().toISOString(),
@@ -66,5 +80,5 @@ export function initLogger() {
         sendLog('error', ...args);
     };
 
-    console.log('[logger] Frontend log exporter initialized');
+    console.log('[logger] Frontend log exporter initialized, sessionId:', sessionId);
 }
