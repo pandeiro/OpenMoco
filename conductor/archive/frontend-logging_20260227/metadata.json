@@ -1,0 +1,8 @@
+{
+  "track_id": "frontend-logging_20260227",
+  "type": "feature",
+  "status": "new",
+  "created_at": "2026-02-27T12:00:00Z",
+  "updated_at": "2026-02-27T12:00:00Z",
+  "description": "Frontend console.log exporter to Docker container logs for debugging Web Speech API"
+}

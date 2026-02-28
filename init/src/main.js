@@ -1,4 +1,7 @@
 import './style.css';
+import { initLogger } from './lib/logger.js';
+
+initLogger();
 
 // Router simple implementation
 const routes = {
