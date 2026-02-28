@@ -51,10 +51,10 @@
 ## Phase 3: Integration Testing
 
 ### Task 3.1: OpenCode Session Integration
-- [ ] Start OpenCode agent session
-- [ ] Verify Playwright is require-able from session
-- [ ] Test browser launch from within OpenCode environment
-- [ ] Confirm /code volume is accessible for saving files
+- [x] Start OpenCode agent session
+- [x] Verify Playwright is require-able from session
+- [x] Test browser launch from within OpenCode environment
+- [x] Confirm /code volume is accessible for saving files
 
 ### Task 3.2: Resource Usage Testing
 - [ ] Monitor memory usage during browser operations
