@@ -10,7 +10,7 @@
 
 - [ ] Task: Conductor - User Manual Verification 'Backend (Nginx Configuration)' (Protocol in workflow.md)
 
-## Phase 2: Frontend (Logger Utility)
+## Phase 2: Frontend (Logger Utility) [checkpoint: be6ed0f]
 
 - [x] Task: Create frontend logger module [765b9b3]
     - [x] Create `init/src/lib/logger.js` with console override logic
