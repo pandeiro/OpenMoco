@@ -43,7 +43,7 @@ The skills-spike identified several plugins that would enhance OpenCode's capabi
     - [x] opencode.json plugin array approach
 
 ### Task 2: Evaluate opencode-notify
-- [x] Task: Research opencode-notify requirements
+- [x] Task: Research opencode-notify requirements [0ae179d]
     - [x] Dependencies (does it need desktop environment?)
     - [x] Configuration options
     - [x] Compatibility with containerized OpenCode
