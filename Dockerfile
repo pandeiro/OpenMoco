@@ -37,7 +37,7 @@ COPY skills/frontend-design/SKILL.md /root/.config/opencode/skills/frontend-desi
 RUN mkdir -p /workspace
 
 # Copy entrypoint script
-COPY entrypoint.sh /entrypoint.sh
+COPY agent/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 WORKDIR /workspace

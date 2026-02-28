@@ -9,7 +9,9 @@ COPY package*.json ./
 RUN npm ci --production
 
 COPY . .
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 EXPOSE 3001
 
-CMD ["node", "server.js"]
+ENTRYPOINT ["/entrypoint.sh"]
