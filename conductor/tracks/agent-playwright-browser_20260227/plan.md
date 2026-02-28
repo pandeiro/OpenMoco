@@ -14,9 +14,9 @@
 - [x] Document the changes [3ce5ac6]
 
 ### Task 1.2: Update Docker Compose Configuration
-- [ ] Add `shm_size: '2gb'` to agent service for Chromium shared memory
-- [ ] Verify health check still passes after changes
-- [ ] Test docker-compose configuration validity
+- [x] Add `shm_size: '2gb'` to agent service for Chromium shared memory [eb4173b]
+- [x] Verify health check still passes after changes [eb4173b]
+- [x] Test docker-compose configuration validity [eb4173b]
 
 ### Task 1.3: Build and Validate Container
 - [ ] Build new agent image locally
