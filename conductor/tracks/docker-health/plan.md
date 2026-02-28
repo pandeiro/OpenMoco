@@ -36,6 +36,6 @@ P1 (High) | Effort: Small (~30 min)
 ## Phase 3: Verification [checkpoint: d11c403]
 
 ### Task 3: Verify Health Status
-- [ ] Task: Verify health checks work
-    - [ ] `docker ps` shows health status for all containers
-    - [ ] Unhealthy containers are detected and logged
+- [x] Task: Verify health checks work
+    - [x] `docker ps` shows health status for all containers
+    - [x] Unhealthy containers are detected and logged
