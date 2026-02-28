@@ -12,20 +12,20 @@
 
 ## Phase 2: Frontend (Logger Utility)
 
-- [ ] Task: Create frontend logger module
-    - [ ] Create `init/src/lib/logger.js` with console override logic
-    - [ ] Implement `sendLog(level, ...args)` function with JSON structure
-    - [ ] Use `navigator.sendBeacon()` with `fetch()` fallback
-    - [ ] Handle multi-argument console calls and object serialization
+- [x] Task: Create frontend logger module [765b9b3]
+    - [x] Create `init/src/lib/logger.js` with console override logic
+    - [x] Implement `sendLog(level, ...args)` function with JSON structure
+    - [x] Use `navigator.sendBeacon()` with `fetch()` fallback
+    - [x] Handle multi-argument console calls and object serialization
 
-- [ ] Task: Override native console methods
-    - [ ] Store references to original `console.log`, `console.warn`, `console.error`
-    - [ ] Replace with wrapped versions that call original + `sendLog()`
-    - [ ] Ensure errors in log sending are caught silently
+- [x] Task: Override native console methods [765b9b3]
+    - [x] Store references to original `console.log`, `console.warn`, `console.error`
+    - [x] Replace with wrapped versions that call original + `sendLog()`
+    - [x] Ensure errors in log sending are caught silently
 
-- [ ] Task: Initialize logger on app startup
-    - [ ] Import and execute logger setup in `init/src/main.js` (or entry point)
-    - [ ] Verify logs are sent before page unload
+- [x] Task: Initialize logger on app startup [765b9b3]
+    - [x] Import and execute logger setup in `init/src/main.js` (or entry point)
+    - [x] Verify logs are sent before page unload
 
 - [ ] Task: Conductor - User Manual Verification 'Frontend (Logger Utility)' (Protocol in workflow.md)
 
