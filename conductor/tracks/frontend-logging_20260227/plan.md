@@ -29,7 +29,7 @@
 
 - [ ] Task: Conductor - User Manual Verification 'Frontend (Logger Utility)' (Protocol in workflow.md)
 
-## Phase 3: Integration & Verification
+## Phase 3: Integration & Verification [checkpoint: b940d75]
 
 - [x] Task: End-to-end verification
     - [x] Rebuild Docker containers with new nginx config
