@@ -15,7 +15,7 @@ const router = Router();
  * Returns: { prompt, slug? }
  */
 router.post('/reform', async (req, res) => {
-    console.log('[reform] POST /api/reform - body:', JSON.stringify(req.body, null, 2));
+    console.log('[reform] POST /api/reform - body:', JSON.stringify(req.body));
     try {
         const { transcript, project } = req.body;
 
@@ -25,7 +25,7 @@ router.post('/reform', async (req, res) => {
         }
 
         if (!project?.name) {
-            console.log('[reform] ERROR: Missing project context. Project:', project);
+            console.log('[reform] ERROR: Missing project context. Project:', JSON.stringify(project));
             return res.status(400).json({ error: 'Missing project context' });
         }
 
