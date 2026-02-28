@@ -2,10 +2,10 @@
 
 ## Phase 1: Backend (Nginx Configuration)
 
-- [ ] Task: Add `/api/logs` endpoint to nginx.conf
-    - [ ] Create new location block for `POST /api/logs` in `gateway/nginx.conf`
-    - [ ] Configure nginx to read POST body and write to stdout using `access_log`
-    - [ ] Return `204 No Content` response to client
+- [x] Task: Add `/api/logs` endpoint to nginx.conf [38bc59d]
+    - [x] Create new location block for `POST /api/logs` in `gateway/nginx.conf`
+    - [x] Configure nginx to read POST body and write to stdout using `access_log`
+    - [x] Return `204 No Content` response to client
     - [ ] Test with curl to verify logs appear in `docker logs`
 
 - [ ] Task: Conductor - User Manual Verification 'Backend (Nginx Configuration)' (Protocol in workflow.md)
