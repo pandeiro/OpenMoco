@@ -37,7 +37,7 @@ The skills-spike identified several plugins that would enhance OpenCode's capabi
 ## Phase 1: Research
 
 ### Task 1: Research Plugin Installation
-- [x] Task: Document plugin installation methods
+- [x] Task: Document plugin installation methods [e0f3cab]
     - [x] npm global install approach
     - [x] Local file approach (current moko-logger pattern)
     - [x] opencode.json plugin array approach
