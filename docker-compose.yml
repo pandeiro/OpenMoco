@@ -37,7 +37,7 @@ services:
       - OPENMOKO_USER=${OPENMOKO_USER}
       - OPENMOKO_PASSWORD=${OPENMOKO_PASSWORD}
     healthcheck:
-      test: ["CMD", "wget", "-q", "--spider", "http://localhost:80/init/"]
+      test: ["CMD", "curl", "-f", "http://localhost:80/health"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -55,7 +55,7 @@ services:
     labels:
       - "logging=enabled"
     healthcheck:
-      test: ["CMD", "wget", "-q", "--spider", "http://localhost:3000/"]
+      test: ["CMD", "curl", "-f", "http://localhost:3000/"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -74,7 +74,7 @@ services:
       - ./ssh:/root/.ssh:ro
       - events_data:/data
     healthcheck:
-      test: ["CMD", "wget", "-q", "--spider", "http://localhost:3001/api/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:3001/api/health"]
       interval: 30s
       timeout: 10s
       retries: 3

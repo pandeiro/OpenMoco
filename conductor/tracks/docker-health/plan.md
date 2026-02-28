@@ -39,3 +39,8 @@ P1 (High) | Effort: Small (~30 min)
 - [x] Task: Verify health checks work
     - [x] `docker ps` shows health status for all containers
     - [x] Unhealthy containers are detected and logged
+
+### Fixes Applied (Feb 27, 2026):
+- **Universal `curl`:** Installed `curl` in all Dockerfiles (`events`, `init`, `gateway`) for reliable health checks.
+- **Bypassed Auth:** Added unauthenticated `/health` location in `gateway/nginx.conf` to prevent 401 failures.
+- **Improved Reliability:** Switched from `wget` to `curl -f` in `docker-compose.yml` healthcheck commands.

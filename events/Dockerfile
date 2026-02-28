@@ -1,7 +1,7 @@
 FROM node:22-alpine
 
-# Git + SSH needed for cloning repos directly
-RUN apk add --no-cache git openssh-client
+# Git + SSH needed for cloning repos directly, curl for healthchecks
+RUN apk add --no-cache git openssh-client curl
 
 WORKDIR /app
 
