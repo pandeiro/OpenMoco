@@ -14,8 +14,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     pkg-config \
     gnupg
 
-
-
 # Install mise (replaces asdf) for language and tool version management
 RUN curl https://mise.run | sh
 
