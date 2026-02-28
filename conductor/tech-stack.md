@@ -61,6 +61,9 @@
 
 ## External Integrations
 
+### MCP Servers
+- **Context7** - Up-to-date library documentation lookup (remote MCP)
+
 ### GitHub
 - **GitHub PAT** - Repository listing and cloning
 - **GitHub Webhooks** - CI/CD event notifications (push, workflow_run, pull_request)
