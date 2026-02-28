@@ -40,10 +40,10 @@
 - [x] Confirm browser closes cleanly [f760f17]
 
 ### Task 2.3: Test Basic Operations
-- [ ] Navigate to a test website (example.com)
-- [ ] Take a screenshot and save to /code volume
-- [ ] Verify screenshot file is created and valid
-- [ ] Test element selection and interaction
+- [x] Navigate to a test website (example.com) [99942f0]
+- [x] Take a screenshot and save to /code volume [99942f0]
+- [x] Verify screenshot file is created and valid (16KB PNG) [99942f0]
+- [x] Test element selection and interaction [99942f0]
 - [ ] Conductor - User Manual Verification 'Phase 2' (Protocol in workflow.md)
 
 ---
