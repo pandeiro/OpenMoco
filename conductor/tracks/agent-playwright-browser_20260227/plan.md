@@ -27,7 +27,7 @@
 
 ---
 
-## Phase 2: Browser Installation Validation
+## Phase 2: Browser Installation Validation [checkpoint: 001e6d2]
 
 ### Task 2.1: Verify Chromium Installation
 - [x] Run container and check Chromium binary exists [f7fa795]
