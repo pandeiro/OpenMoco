@@ -56,7 +56,7 @@ The skills-spike identified several MCP servers that would enhance OpenCode's ca
 ## Phase 2: Implementation
 
 ### Task 4: Update Entrypoint for MCP Config
-- [x] Task: Add MCP server configuration to entrypoint.sh
+- [x] Task: Add MCP server configuration to entrypoint.sh [80c4399]
     - [x] Conditionally add Context7 (always available)
     - [x] GitHub MCP deferred (requires OAuth browser flow - not suitable for headless container)
 
