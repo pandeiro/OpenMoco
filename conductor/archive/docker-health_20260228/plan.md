@@ -55,3 +55,8 @@ P1 (High) | Effort: Small (~30 min)
 - Gateway reachable on port 7777.
 - `/health` endpoint verified (200 OK).
 - `/init/` endpoint verified with auth (200 OK).
+
+---
+
+## Phase: Review Fixes
+- [x] Task: Apply review suggestions [95152f0]
