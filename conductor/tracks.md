@@ -6,7 +6,6 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ## Active Tracks
 
-- [x] **Track: agent-playwright-browser** - Agent Browser Testing with Playwright (`tracks/agent-playwright-browser_20260227/plan.md`) [5d7406f]
 - [x] **Track: pwa-icons** - PWA Icons (`tracks/pwa-icons/plan.md`) [add2766]
 - [x] **Track: prd-v04** - Create PRD v0.4 (`tracks/prd-v04/plan.md`) [cb65894]
 - [x] **Track: docker-health** - Docker Health Checks (`tracks/docker-health/plan.md`) [d11c403]
@@ -29,6 +28,7 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ## Archived Tracks
 
+- [x] **Track: agent-playwright-browser** - Agent Browser Testing with Playwright (`archive/agent-playwright-browser_20260227/plan.md`) [5d7406f]
 - [x] **Track: opencode-plugins** - OpenCode Plugins Installation (`archive/opencode-plugins/plan.md`) [5d323d3]
 - [x] **Track: mcp-servers** - MCP Servers Integration (`archive/mcp-servers/plan.md`) [80c4399]
 - [x] **Track: opencode-provider-config** - OpenCode Provider Config Implementation (`archive/opencode-provider-config/plan.md`) [7788e85]
