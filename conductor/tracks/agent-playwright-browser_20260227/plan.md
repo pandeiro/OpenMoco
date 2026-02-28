@@ -35,9 +35,9 @@
 - [x] Confirm no missing dependencies errors [f7fa795]
 
 ### Task 2.2: Test Browser Launch
-- [ ] Create test script to launch browser in headless mode
-- [ ] Verify browser launches without sandbox errors
-- [ ] Confirm browser closes cleanly
+- [x] Create test script to launch browser in headless mode [f760f17]
+- [x] Verify browser launches without sandbox errors [f760f17]
+- [x] Confirm browser closes cleanly [f760f17]
 
 ### Task 2.3: Test Basic Operations
 - [ ] Navigate to a test website (example.com)
