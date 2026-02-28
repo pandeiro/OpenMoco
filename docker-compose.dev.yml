@@ -1,7 +1,9 @@
 services:
   agent:
-    image: openmoko/agent:latest
-    container_name: openmoko-agent
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: openmoko-agent-dev
     labels:
       - "logging=enabled"
     expose:
@@ -13,24 +15,26 @@ services:
       - agent_state:/root/.local/state/opencode:rw
       - agent_config:/root/.config/opencode:rw
       - ./ssh:/root/.ssh:ro
-
     environment:
       - GIT_USER_NAME=${GIT_USER_NAME}
       - GIT_USER_EMAIL=${GIT_USER_EMAIL}
-      - NODE_ENV=production
-
+      - OLLAMA_API_KEY=${OLLAMA_API_KEY}
+      - GOOGLE_AI_STUDIO_API_KEY=${GOOGLE_AI_STUDIO_API_KEY}
+      - OPENCODE_API_KEY=${OPENCODE_API_KEY}
+      - NODE_ENV=development
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/"]
       interval: 30s
       timeout: 10s
       retries: 3
       start_period: 40s
-
     restart: unless-stopped
 
   gateway:
-    image: openmoko/gateway:latest
-    container_name: openmoko-gateway
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    container_name: openmoko-gateway-dev
     ports:
       - "7777:80"
     environment:
@@ -48,8 +52,10 @@ services:
     restart: unless-stopped
 
   init:
-    image: openmoko/init:latest
-    container_name: openmoko-init
+    build:
+      context: ./init
+      dockerfile: Dockerfile
+    container_name: openmoko-init-dev
     expose:
       - "3000"
     labels:
@@ -62,8 +68,10 @@ services:
     restart: unless-stopped
 
   events:
-    image: openmoko/events:latest
-    container_name: openmoko-events
+    build:
+      context: ./events
+      dockerfile: Dockerfile
+    container_name: openmoko-events-dev
     env_file: .env
     expose:
       - "3001"

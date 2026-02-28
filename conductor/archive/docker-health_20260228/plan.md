@@ -36,6 +36,27 @@ P1 (High) | Effort: Small (~30 min)
 ## Phase 3: Verification [checkpoint: d11c403]
 
 ### Task 3: Verify Health Status
-- [ ] Task: Verify health checks work
-    - [ ] `docker ps` shows health status for all containers
-    - [ ] Unhealthy containers are detected and logged
+- [x] Task: Verify health checks work
+    - [x] `docker ps` shows health status for all containers
+    - [x] Unhealthy containers are detected and logged
+
+---
+
+## Phase 4: Local Development [checkpoint: 7584dfc]
+
+### Task 4: Create docker-compose.dev.yml
+- [x] Task: Create development-specific docker-compose
+    - [x] Add `build` sections for all services
+    - [x] Use local Dockerfiles to solve architecture mismatches
+    - [x] Test system boot-up
+
+### Success (Feb 28, 2026):
+- All 4 services (`agent`, `events`, `init`, `gateway`) are Up and **healthy**.
+- Gateway reachable on port 7777.
+- `/health` endpoint verified (200 OK).
+- `/init/` endpoint verified with auth (200 OK).
+
+---
+
+## Phase: Review Fixes
+- [x] Task: Apply review suggestions [95152f0]
