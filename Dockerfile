@@ -14,15 +14,20 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     pkg-config \
     gnupg
 
-# Keep package list for now, easier to install needed packages
-#   gnupg \
-#   && rm -rf /var/lib/apt/lists/*
+
 
 # Install mise (replaces asdf) for language and tool version management
 RUN curl https://mise.run | sh
 
 # Install OpenCode globally
 RUN npm i -g opencode-ai@latest
+
+# Install Playwright for browser automation
+RUN npm i -g playwright
+RUN npx playwright install chromium --with-deps --only-shell
+
+# Clean up apt cache to minimize image size
+RUN rm -rf /var/lib/apt/lists/*
 
 # Install Conductor plugin for OpenCode
 RUN CI=true npx create-conductor-flow --agent opencode --scope global --git-ignore none
