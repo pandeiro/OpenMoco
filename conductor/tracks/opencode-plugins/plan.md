@@ -49,28 +49,26 @@ The skills-spike identified several plugins that would enhance OpenCode's capabi
     - [x] Compatibility with containerized OpenCode
 
 ### Task 3: Evaluate opencode-quota
-- [ ] Task: Research opencode-quota requirements
-    - [ ] How it tracks usage
-    - [ ] Output format (logs? API?)
-    - [ ] Integration with moko-logger
+- [x] Task: Research opencode-quota requirements [skipped]
+    - Decision: User declined quota plugin - moko-logger already provides token tracking
 
 ---
 
 ## Phase 2: Implementation
 
-### Task 4: Add Selected Plugins
-- [ ] Task: Install chosen plugins
-    - [ ] Add to Dockerfile or entrypoint.sh
-    - [ ] Configure in opencode.json if needed
-    - [ ] Document in README
+### Task 4: Document Plugin Decisions
+- [x] Task: Update documentation with plugin evaluation results
+    - [x] Update skills-tools-spike.md with implementation notes
+    - [x] Document that no additional plugins are needed
+    - [x] Record reasoning for future reference
 
 ---
 
 ## Open Questions
 
-1. **Desktop notifications in container?** - `opencode-notify` may not work in headless container. Need to verify.
-2. **Quota tracking utility?** - If `opencode-quota` overlaps with `moko-logger`, we may not need both.
-3. **Plugin discovery** - Should we use npm install or copy local files?
+1. ~~Desktop notifications in container?~~ - **ANSWERED:** opencode-notify requires desktop environment, not compatible
+2. ~~Quota tracking utility?~~ - **ANSWERED:** moko-logger already covers token tracking, quota plugin not needed
+3. ~~Plugin discovery~~ - **ANSWERED:** Documented in plugin-installation-methods.md
 
 ---
 

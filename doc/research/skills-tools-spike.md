@@ -154,17 +154,35 @@ OpenCode has a rich ecosystem of extensibility options: **Plugins**, **MCP Serve
 - **moko-logger** - Custom plugin for event logging (tokens, tools)
 - **frontend-design** - Skill for high-quality UI design (SKILL.md)
 
-### Recommended Additions
+### Evaluated and Not Installed (2026-02-27)
 
-1. **opencode-notify** - Desktop notifications when sessions complete
-   ```bash
-   npm install -g opencode-notify
-   ```
+#### opencode-notify - ❌ Not Compatible
+**Status:** Evaluated, not installed
+**Reason:** Requires desktop environment (macOS Notification Centre, Linux D-Bus, Windows notifications). Not compatible with headless Docker container.
+**Documentation:** [opencode-notify-evaluation.md](./opencode-notify-evaluation.md)
 
-2. **opencode-quota** - Track API usage across providers
-   ```bash
-   npm install -g opencode-quota
-   ```
+#### opencode-quota - ❌ Not Needed
+**Status:** Skipped per user decision
+**Reason:** moko-logger already provides token tracking functionality. No additional quota tracking needed.
+**Note:** Plugin is well-designed for tracking subscription quotas across providers (ChatGPT Codex, Google Antigravity, z.ai) but redundant for our use case.
+
+### Installation Methods Documentation
+
+**See:** [plugin-installation-methods.md](./plugin-installation-methods.md)
+
+Three methods documented:
+1. npm global install - Standard approach for published plugins
+2. Local file approach - Current moko-logger pattern
+3. opencode.json plugin array - Declarative, auto-managed
+
+### Recommendation
+
+**No additional plugins needed** at this time. The current setup provides:
+- Event logging via moko-logger
+- UI design guidance via frontend-design skill
+- MCP integration via Context7 (already configured)
+
+Future plugin additions should be evaluated against container compatibility and overlap with existing tools.
 
 ---
 
