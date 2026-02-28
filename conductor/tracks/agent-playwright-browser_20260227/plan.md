@@ -79,10 +79,10 @@
 - [x] Add troubleshooting guide for common issues [198a54c]
 
 ### Task 4.2: Create Usage Examples
-- [ ] Write example script: Basic screenshot capture
-- [ ] Write example script: Form interaction
-- [ ] Write example script: Data extraction
-- [ ] Place examples in doc/examples/ directory
+- [x] Write example script: Basic screenshot capture [e77194b]
+- [x] Write example script: Form interaction [e77194b]
+- [x] Write example script: Data extraction [e77194b]
+- [x] Place examples in doc/examples/ directory [e77194b]
 
 ### Task 4.3: Final Validation
 - [ ] Run complete workflow test end-to-end
