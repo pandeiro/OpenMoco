@@ -117,9 +117,10 @@ For CI/CD awareness, add a webhook to your repositories:
 
 ## Deployment
 
-### Local Development
+### Local Development & Testing
 
-Run services separately for debugging:
+#### 1. Direct Process (Debugging)
+Run services separately for granular debugging:
 
 ```bash
 # Terminal 1: Events backend
@@ -130,6 +131,14 @@ cd init && npm run dev
 ```
 
 The Vite dev server proxies `/api/*` to `localhost:3001`.
+
+#### 2. Local Docker Build (Multi-arch / Integration)
+To build all images locally (e.g., for ARM64/Apple Silicon) and test the full multi-service environment:
+
+```bash
+docker compose -f docker-compose.dev.yml up --build -d
+```
+This starts containers with the `-dev` suffix (e.g., `openmoko-gateway-dev`) and maps port 7777 to your host.
 
 ### Production VPS
 

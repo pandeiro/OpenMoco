@@ -27,6 +27,11 @@ cd events && DATA_DIR=../events_data CODE_DIR=../code npm run dev
 # Terminal 2: Init frontend with API proxy
 cd init && npm run dev
 ```
+
+Alternatively, use the development Docker Compose to build and run all services locally (useful for multi-architecture testing):
+```bash
+docker compose -f docker-compose.dev.yml up --build -d
+```
 The init Vite dev server proxies `/api/*` to `localhost:3001`. Ensure you have API keys (GEMINI_API_KEY, GITHUB_PAT) in your `.env` file.
 
 ## Single Source of Truth
