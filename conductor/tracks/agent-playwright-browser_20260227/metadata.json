@@ -1,0 +1,8 @@
+{
+  "track_id": "agent-playwright-browser_20260227",
+  "type": "feature",
+  "status": "in_progress",
+  "created_at": "2026-02-27T00:00:00Z",
+  "updated_at": "2026-02-27T00:00:00Z",
+  "description": "Enable browser-based testing in agent container by integrating Playwright with Chromium headless shell for AI-driven web automation"
+}

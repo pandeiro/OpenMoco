@@ -6,6 +6,7 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ## Active Tracks
 
+- [~] **Track: agent-playwright-browser** - Agent Browser Testing with Playwright (`tracks/agent-playwright-browser_20260227/plan.md`)
 - [x] **Track: pwa-icons** - PWA Icons (`tracks/pwa-icons/plan.md`) [add2766]
 - [x] **Track: prd-v04** - Create PRD v0.4 (`tracks/prd-v04/plan.md`) [cb65894]
 - [x] **Track: docker-health** - Docker Health Checks (`tracks/docker-health/plan.md`) [d11c403]
