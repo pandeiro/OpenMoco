@@ -72,9 +72,25 @@ app.use('/events', eventsRouter);
 // --- Startup ---
 async function start() {
   await ensureDataDir();
-  app.listen(PORT, '0.0.0.0', () => {
+  const server = app.listen(PORT, '0.0.0.0', () => {
     console.log(`openmoko-events listening on port ${PORT}`);
   });
+
+  const shutdown = (signal) => {
+    console.log(`\n[${signal}] Starting graceful shutdown...`);
+    server.close(() => {
+      console.log('[shutdown] HTTP server closed');
+      process.exit(0);
+    });
+
+    setTimeout(() => {
+      console.error('[shutdown] Forced shutdown after timeout');
+      process.exit(1);
+    }, 10000);
+  };
+
+  process.on('SIGTERM', () => shutdown('SIGTERM'));
+  process.on('SIGINT', () => shutdown('SIGINT'));
 }
 
 start().catch((err) => {

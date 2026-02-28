@@ -5,6 +5,7 @@
  */
 
 import { Router } from 'express';
+import { body, validationResult } from 'express-validator';
 import { execSync } from 'node:child_process';
 import { existsSync, mkdirSync } from 'node:fs';
 import { createAndPrompt, promptActiveSession } from '../lib/session.js';
@@ -12,11 +13,23 @@ import { readJSON } from '../lib/data.js';
 
 const router = Router();
 
+function handleValidationErrors(req, res, next) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+    next();
+}
+
 /**
  * POST /api/session/create
  * Body: { projectPath, prompt, branch?, slug?, repo?, notificationsEnabled? }
  */
-router.post('/create', async (req, res) => {
+router.post('/create',
+    body('projectPath').isString().trim().isLength({ min: 1 }).withMessage('projectPath is required'),
+    body('prompt').isString().trim().isLength({ min: 1 }).withMessage('prompt is required'),
+    handleValidationErrors,
+    async (req, res) => {
     try {
         const { projectPath, prompt, branch, slug, repo, notificationsEnabled, isNewProject } = req.body;
 
@@ -65,7 +78,10 @@ router.get('/active', async (_req, res) => {
  * Body: { text }
  * Send a follow-up prompt to the active session (for CI failure forwarding).
  */
-router.post('/prompt', async (req, res) => {
+router.post('/prompt',
+    body('text').isString().trim().isLength({ min: 1 }).withMessage('text is required'),
+    handleValidationErrors,
+    async (req, res) => {
     try {
         const { text } = req.body;
         if (!text) {

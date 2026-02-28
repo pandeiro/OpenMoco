@@ -121,6 +121,82 @@ EOF
     fi
 fi
 
+# Configure OpenCode Zen/Go provider if API key is present
+if [ -n "$OPENCODE_API_KEY" ]; then
+    echo "OpenCode API key detected, configuring OpenCode Zen/Go provider..."
+    
+    CONFIG_DIR="$HOME/.config/opencode"
+    CONFIG_FILE="$CONFIG_DIR/opencode.json"
+    
+    # Create config directory if it doesn't exist
+    mkdir -p "$CONFIG_DIR"
+    
+    # Check if config file exists
+    if [ -f "$CONFIG_FILE" ]; then
+        # Config exists, check if opencode provider already configured
+        if grep -q '"opencode"' "$CONFIG_FILE"; then
+            echo "OpenCode provider already configured in opencode.json"
+        else
+            # Add opencode provider to existing config
+            echo "Adding OpenCode provider to existing config..."
+            TEMP_FILE=$(mktemp)
+            jq '.provider.opencode = {
+              "options": {
+                "apiKey": "'"$OPENCODE_API_KEY"'"
+              }
+            }' "$CONFIG_FILE" > "$TEMP_FILE" && mv "$TEMP_FILE" "$CONFIG_FILE"
+        fi
+    else
+        # Config doesn't exist, create it with opencode provider
+        echo "Creating opencode.json with OpenCode provider..."
+        cat > "$CONFIG_FILE" <<EOF
+{
+  "\$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "opencode": {
+      "options": {
+        "apiKey": "${OPENCODE_API_KEY}"
+      }
+    }
+  }
+}
+EOF
+    fi
+fi
+
+# Configure Context7 MCP server (always available, no auth required)
+echo "Configuring Context7 MCP server..."
+CONFIG_DIR="$HOME/.config/opencode"
+CONFIG_FILE="$CONFIG_DIR/opencode.json"
+
+mkdir -p "$CONFIG_DIR"
+
+if [ -f "$CONFIG_FILE" ]; then
+    if grep -q '"context7"' "$CONFIG_FILE"; then
+        echo "Context7 MCP already configured in opencode.json"
+    else
+        echo "Adding Context7 MCP to existing config..."
+        TEMP_FILE=$(mktemp)
+        jq '.mcp.context7 = {
+          "type": "remote",
+          "url": "https://mcp.context7.com/mcp"
+        }' "$CONFIG_FILE" > "$TEMP_FILE" && mv "$TEMP_FILE" "$CONFIG_FILE"
+    fi
+else
+    echo "Creating opencode.json with Context7 MCP..."
+    cat > "$CONFIG_FILE" <<EOF
+{
+  "\$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp"
+    }
+  }
+}
+EOF
+fi
+
 # Set up SSH for git (if SSH keys are mounted)
 if [ -d "/root/.ssh" ]; then
     # Directory is mounted read-only, so we can't chmod it
