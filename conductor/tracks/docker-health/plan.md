@@ -40,7 +40,18 @@ P1 (High) | Effort: Small (~30 min)
     - [x] `docker ps` shows health status for all containers
     - [x] Unhealthy containers are detected and logged
 
-### Fixes Applied (Feb 27, 2026):
-- **Universal `curl`:** Installed `curl` in all Dockerfiles (`events`, `init`, `gateway`) for reliable health checks.
-- **Bypassed Auth:** Added unauthenticated `/health` location in `gateway/nginx.conf` to prevent 401 failures.
-- **Improved Reliability:** Switched from `wget` to `curl -f` in `docker-compose.yml` healthcheck commands.
+---
+
+## Phase 4: Local Development [checkpoint: 7584dfc]
+
+### Task 4: Create docker-compose.dev.yml
+- [x] Task: Create development-specific docker-compose
+    - [x] Add `build` sections for all services
+    - [x] Use local Dockerfiles to solve architecture mismatches
+    - [x] Test system boot-up
+
+### Success (Feb 28, 2026):
+- All 4 services (`agent`, `events`, `init`, `gateway`) are Up and **healthy**.
+- Gateway reachable on port 7777.
+- `/health` endpoint verified (200 OK).
+- `/init/` endpoint verified with auth (200 OK).

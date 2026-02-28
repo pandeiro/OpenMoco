@@ -1,0 +1,98 @@
+services:
+  agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: openmoko-agent-dev
+    labels:
+      - "logging=enabled"
+    expose:
+      - "8080"
+    volumes:
+      - ./code:/code:rw
+      - agent_data:/root/.local/share/opencode:rw
+      - mise_data:/root/.local/share/mise:rw
+      - agent_state:/root/.local/state/opencode:rw
+      - agent_config:/root/.config/opencode:rw
+      - ./ssh:/root/.ssh:ro
+    environment:
+      - GIT_USER_NAME=${GIT_USER_NAME}
+      - GIT_USER_EMAIL=${GIT_USER_EMAIL}
+      - OLLAMA_API_KEY=${OLLAMA_API_KEY}
+      - GOOGLE_AI_STUDIO_API_KEY=${GOOGLE_AI_STUDIO_API_KEY}
+      - OPENCODE_API_KEY=${OPENCODE_API_KEY}
+      - NODE_ENV=development
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+
+  gateway:
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    container_name: openmoko-gateway-dev
+    ports:
+      - "7777:80"
+    environment:
+      - OPENMOKO_USER=${OPENMOKO_USER}
+      - OPENMOKO_PASSWORD=${OPENMOKO_PASSWORD}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    depends_on:
+      - agent
+      - init
+      - events
+    restart: unless-stopped
+
+  init:
+    build:
+      context: ./init
+      dockerfile: Dockerfile
+    container_name: openmoko-init-dev
+    expose:
+      - "3000"
+    labels:
+      - "logging=enabled"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  events:
+    build:
+      context: ./events
+      dockerfile: Dockerfile
+    container_name: openmoko-events-dev
+    env_file: .env
+    expose:
+      - "3001"
+    labels:
+      - "logging=enabled"
+    volumes:
+      - ./code:/code:rw
+      - ./ssh:/root/.ssh:ro
+      - events_data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    depends_on:
+      - agent
+    restart: unless-stopped
+
+volumes:
+  agent_data:
+  agent_state:
+  agent_config:
+  mise_data:
+  events_data:
