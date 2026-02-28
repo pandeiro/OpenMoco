@@ -1,7 +1,7 @@
 services:
   agent:
     image: openmoko/agent:latest
-    container_name: agent
+    container_name: openmoko-agent
     labels:
       - "logging=enabled"
     expose:
@@ -30,6 +30,7 @@ services:
 
   gateway:
     image: openmoko/gateway:latest
+    container_name: openmoko-gateway
     ports:
       - "7777:80"
     environment:
@@ -48,8 +49,11 @@ services:
 
   init:
     image: openmoko/init:latest
+    container_name: openmoko-init
     expose:
       - "3000"
+    labels:
+      - "logging=enabled"
     healthcheck:
       test: ["CMD", "wget", "-q", "--spider", "http://localhost:3000/"]
       interval: 30s
@@ -59,6 +63,7 @@ services:
 
   events:
     image: openmoko/events:latest
+    container_name: openmoko-events
     env_file: .env
     expose:
       - "3001"
