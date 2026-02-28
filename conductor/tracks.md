@@ -22,7 +22,8 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ## Pending Tracks
 
-(None - all tracks complete)
+- [ ] **Track: Frontend Console Log Exporter**
+*Link: [./tracks/frontend-logging_20260227/](./tracks/frontend-logging_20260227/)*
 
 ---
 
