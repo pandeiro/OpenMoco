@@ -5,7 +5,7 @@
 
 ---
 
-## Phase 1: Docker Environment Setup
+## Phase 1: Docker Environment Setup [checkpoint: 10b6753]
 
 ### Task 1.1: Update Agent Dockerfile
 - [x] Add Playwright library installation to Dockerfile [3ce5ac6]
