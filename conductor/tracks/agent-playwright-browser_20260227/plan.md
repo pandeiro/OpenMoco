@@ -70,7 +70,7 @@
 
 ---
 
-## Phase 4: Documentation and Finalization
+## Phase 4: Documentation and Finalization [checkpoint: e9aa2f2]
 
 ### Task 4.1: Update Documentation
 - [x] Add browser testing section to README.md [198a54c]
