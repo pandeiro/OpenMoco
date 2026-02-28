@@ -8,10 +8,10 @@
 ## Phase 1: Docker Environment Setup
 
 ### Task 1.1: Update Agent Dockerfile
-- [ ] Add Playwright library installation to Dockerfile
-- [ ] Install Chromium headless shell with system dependencies
-- [ ] Clean up apt cache to minimize image size
-- [ ] Document the changes
+- [x] Add Playwright library installation to Dockerfile [3ce5ac6]
+- [x] Install Chromium headless shell with system dependencies [3ce5ac6]
+- [x] Clean up apt cache to minimize image size [3ce5ac6]
+- [x] Document the changes [3ce5ac6]
 
 ### Task 1.2: Update Docker Compose Configuration
 - [ ] Add `shm_size: '2gb'` to agent service for Chromium shared memory
