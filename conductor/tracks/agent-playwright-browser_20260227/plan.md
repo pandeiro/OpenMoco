@@ -57,10 +57,10 @@
 - [x] Confirm /code volume is accessible for saving files
 
 ### Task 3.2: Resource Usage Testing
-- [ ] Monitor memory usage during browser operations
-- [ ] Verify stays under 800MB during active testing
-- [ ] Test sequential browser launches (no memory leaks)
-- [ ] Confirm 2GB RAM VPS can handle workload
+- [x] Monitor memory usage during browser operations
+- [x] Verify stays under 800MB during active testing (407MB peak)
+- [x] Test sequential browser launches (no memory leaks)
+- [x] Confirm 2GB RAM VPS can handle workload
 
 ### Task 3.3: Error Handling Validation
 - [ ] Test graceful handling of invalid URLs
