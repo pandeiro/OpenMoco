@@ -138,6 +138,12 @@ To build all images locally (e.g., for ARM64/Apple Silicon) and test the full mu
 ```bash
 docker compose -f docker-compose.dev.yml up --build -d
 ```
+
+**Verify the setup:**
+- **Check health:** `docker compose -f docker-compose.dev.yml ps` (wait for "healthy" status)
+- **Access UI:** Open `http://localhost:7777/init/` in your browser
+- **Check Gateway:** `curl http://localhost:7777/health` should return "OK"
+
 This starts containers with the `-dev` suffix (e.g., `openmoko-gateway-dev`) and maps port 7777 to your host.
 
 ### Production VPS

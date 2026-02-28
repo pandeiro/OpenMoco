@@ -28,11 +28,16 @@ cd events && DATA_DIR=../events_data CODE_DIR=../code npm run dev
 cd init && npm run dev
 ```
 
-Alternatively, use the development Docker Compose to build and run all services locally (useful for multi-architecture testing):
+Alternatively, use the development Docker Compose to build and run all services locally. This is the preferred method for verifying architecture compatibility (e.g., Apple Silicon) and ensuring all service integrations (gateway, events, init, agent) are working correctly:
+
 ```bash
+# Build and start all services locally
 docker compose -f docker-compose.dev.yml up --build -d
+
+# Verify all containers are "healthy"
+docker compose -f docker-compose.dev.yml ps
 ```
-The init Vite dev server proxies `/api/*` to `localhost:3001`. Ensure you have API keys (GEMINI_API_KEY, GITHUB_PAT) in your `.env` file.
+This maps port 7777 to your host, just like the production setup. Ensure you have API keys (GEMINI_API_KEY, GITHUB_PAT) in your `.env` file.
 
 ## Single Source of Truth
 The Product Requirements Document (PRD) at `doc/prd/openmoko-prd-v0.4.md` is the absolute source of truth for architectural constraints and feature behavior. **Always consult the PRD before fundamentally altering how features operate.**
