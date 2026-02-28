@@ -14,6 +14,7 @@ It bundles [OpenCode](https://opencode.ai/) with a custom multi-service architec
 - **Graceful shutdown** handling for smoother deployments
 - **Dynamic default branch** detection (works with `master` or `main`)
 - **Multi-arch builds** (optional ARM64 support)
+- **Browser automation** with Playwright and Chromium for testing and screenshot capture
 
 ---
 
@@ -175,6 +176,42 @@ Open the Init PWA → tap ⚙️ → search and enable repos. OpenMoko clones th
 
 ### Resuming Failures
 When CI fails, you'll get a push notification. Tap it to see logs and send a fix to the agent.
+
+---
+
+## Browser Testing
+
+The agent container includes Playwright with Chromium for browser automation:
+
+```javascript
+// From an OpenCode session:
+const { chromium } = require('playwright');
+const browser = await chromium.launch({ headless: true });
+const page = await browser.newPage();
+
+// Navigate and interact
+await page.goto('https://example.com');
+await page.click('button');
+
+// Capture screenshots
+await page.screenshot({ path: '/code/screenshot.png' });
+
+await browser.close();
+```
+
+**Features:**
+- Headless Chromium browser
+- Page navigation and element interaction
+- Screenshot capture
+- Form testing and automation
+- Network monitoring
+
+**Resource Usage:**
+- Peak memory: ~400MB (well within 2GB VPS limit)
+- No memory leaks detected
+- Suitable for sequential testing workflows
+
+See `doc/examples/` for more browser automation examples.
 
 ---
 

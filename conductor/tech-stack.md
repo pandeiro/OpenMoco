@@ -35,6 +35,19 @@
 ### Fallback AI
 - **Ollama Cloud** - Alternative reformulation backend
 
+## Browser Automation
+
+### Testing Framework
+- **Playwright** - Browser automation library
+- **Chromium Headless Shell** - Headless browser for testing
+
+### Capabilities
+- Page navigation and interaction
+- Screenshot capture
+- Form testing and automation
+- Network monitoring
+- Element selection and manipulation
+
 ## Infrastructure
 
 ### Containerization
