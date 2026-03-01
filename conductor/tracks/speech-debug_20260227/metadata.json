@@ -1,0 +1,8 @@
+{
+  "track_id": "speech-debug_20260227",
+  "type": "bug",
+  "status": "new",
+  "created_at": "2026-02-27T21:45:00Z",
+  "updated_at": "2026-02-27T21:45:00Z",
+  "description": "Debug and fix speech-to-text issues in Chrome/Android by creating a reusable speech UI component and standalone debug page"
+}
